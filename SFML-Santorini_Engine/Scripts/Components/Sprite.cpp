@@ -1,7 +1,7 @@
 #include "Sprite.h"
-#include "GameObject.h"
+#include "Core/GameObject.h"
 #include "Transform.h"
-#include "RenderManager.h"
+#include "Managers/RenderManager.h"
 Sprite::Sprite(GameObject* parent) : Component(parent)
 {
 	m_parentTransform = m_parent->GetTransform();

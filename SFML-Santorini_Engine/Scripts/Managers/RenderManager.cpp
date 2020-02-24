@@ -1,5 +1,5 @@
 #include "RenderManager.h"
-#include "Sprite.h"
+#include "Components/Sprite.h"
 
 RenderManager* RenderManager::instance{ nullptr };
 void RenderManager::Render(sf::Drawable* object, const sf::Vector2f& position)

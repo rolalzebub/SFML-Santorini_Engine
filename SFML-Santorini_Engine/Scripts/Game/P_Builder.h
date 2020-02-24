@@ -1,6 +1,6 @@
 #pragma once
-#include "GameObject.h"
-#include "Sprite.h"
+#include "Core/GameObject.h"
+#include "Components/Sprite.h"
 class P_Builder :
 	public GameObject
 {

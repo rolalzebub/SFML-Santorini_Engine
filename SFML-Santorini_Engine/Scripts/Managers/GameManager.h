@@ -1,6 +1,6 @@
 #pragma once
-#include "Manager.h"
-#include "GameLevel.h"
+#include "Core/Manager.h"
+#include "Game/GameLevel.h"
 class GameManager :
 	public Manager
 {

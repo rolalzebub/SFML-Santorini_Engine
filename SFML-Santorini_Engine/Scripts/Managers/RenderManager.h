@@ -1,5 +1,5 @@
 #pragma once
-#include "Manager.h"
+#include "Core/Manager.h"
 #include "SFML/Graphics.hpp"
 class Sprite;
 
