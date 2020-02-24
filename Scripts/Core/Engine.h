@@ -2,6 +2,7 @@
 #include "utility_headers.h"
 #include "Manager.h"
 #include <SFML/System.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 enum class ManagerMode {
 	AllUpdates,
 	FixedUpdateOnly
@@ -11,6 +12,8 @@ class Engine
 {
 private:
 	static Engine* instance;
+	sf::RenderWindow* m_window;
+
 
 	sf::Clock engineClock;
 	sf::Time fixedUpdateInterval;

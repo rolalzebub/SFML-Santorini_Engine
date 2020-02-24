@@ -1,8 +1,9 @@
 #pragma once
 #include "Manager.h"
 #include "SFML/Graphics.hpp"
-#define Renderer RenderManager::Instance()
 class Sprite;
+
+#define Renderer RenderManager::Instance()
 class RenderManager :
 	public Manager
 {
@@ -22,6 +23,9 @@ public:
 	void Update() override;
 	void FixedUpdate() override {};
 	void Stop() override;
+	
+	void AddSprite(Sprite* sp) { m_sprites.push_back(sp); };
+	void SetWindow(sf::RenderWindow* window) { m_window = window; }
 
 };
 

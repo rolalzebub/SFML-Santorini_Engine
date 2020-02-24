@@ -1,8 +1,10 @@
 #pragma once
 #include "utility_headers.h"
+#include "gameTile.h"
 class GameLevel
 {
 	class GameManager;
+    class P_Builder;
 private:
     GameManager* g;
 
@@ -10,8 +12,8 @@ private:
     int m_numPlayers = 2;
     
     
-    //std::array<std::array<tile, 5>, 5> tiles{ {{{tile(), tile(), tile()}}, {{tile(), tile(), tile()}}, {{tile(), tile(), tile()}}} };
-    //std::vector<builder> builders;
+    gameTile tiles[5][5];
+    std::vector<P_Builder> builders;
 
     unsigned short turn;
     void place();

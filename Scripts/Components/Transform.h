@@ -1,8 +1,6 @@
 #pragma once
-#include "utility_headers.h"
 #include <SFML/Graphics/Transformable.hpp>
 #include "Component.h"
-
 
 class Transform :
 	public Component
@@ -10,13 +8,20 @@ class Transform :
 	uPtr<sf::Transformable> transform;
 
 public:
-	void OnStart() override;
-	void OnUpdate() override;
-	void Stop() override;
+	void OnStart() override {};
+	void OnUpdate() override {};
+	void Stop() override {};
 
-	sf::Transformable& GetTransformable();
+	sf::Vector2f getPosition() { return transform->getPosition(); }
+	void setPosition(sf::Vector2f new_pos) { transform->setPosition(new_pos); }
 
-	Transform(GameObject* parent): Component(parent) { }
+	float getRotation() { return transform->getRotation(); }
+	void setRotation(float angle) { return transform->setRotation(angle); }
+
+	sf::Vector2f getScale() { return transform->getScale(); }
+	void setScale(sf::Vector2f new_scale) { transform->setScale(new_scale); }
+
+	Transform(GameObject* parent) : Component(parent) { transform = makeUPtr<sf::Transformable>(); }
 	~Transform() = default;
 };
 

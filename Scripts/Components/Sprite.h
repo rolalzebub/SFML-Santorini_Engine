@@ -1,7 +1,9 @@
 #pragma once
 #include "Component.h"
 #include "utility_headers.h"
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+
+class Transform;
 class Sprite :
 	public Component
 {
@@ -9,7 +11,7 @@ private:
 
 	uPtr<sf::Sprite> m_spriteTexture;
 	int spriteIndex = -1;
-	const sf::Transformable* m_parentTransform;
+	Transform* m_parentTransform;
 
 public:
 	Sprite(GameObject* parent);

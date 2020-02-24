@@ -16,6 +16,9 @@ void Engine::Start()
 {
 	engineClock.restart();
 
+	//Create window and assign it to the renderer
+	//sf::RenderWindow new_window;
+
 	for (auto& m : managers_toUpdate) {
 		m->Start();
 	}

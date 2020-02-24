@@ -36,10 +36,12 @@
 
 bool gameTile::build()
 {
-    std::cout << "Build: " << GetTransform()->GetTransformable().getPosition().x << " " << GetTransform()->GetTransformable().getPosition().y << " " << level << std::endl;
+    /*std::cout << "Build: " << m_transform->getPosition().x << " " << m_transform->getPosition().y << " " << level << std::endl;
     if (level < 4) {
         level++;
         return true;
     }
+    return false;*/
+
     return false;
 }

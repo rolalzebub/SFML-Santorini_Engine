@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/System.hpp>
 class GameObject;
 class Manager;
 class Component

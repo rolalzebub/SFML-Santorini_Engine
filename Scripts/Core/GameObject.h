@@ -9,16 +9,20 @@ protected:
 	std::vector<Component*> m_components;
 	std::vector<GameObject*> m_children;
 	
-	Transform* m_transform;
+	uPtr<Transform> m_transform;
 
 public:
-	virtual void Start() = 0;
-	virtual void Update() = 0;
-	virtual void Stop() = 0;
+	GameObject();
+	GameObject(GameObject* parent);
+	~GameObject();
 
-	virtual void OnCollisionEnter() = 0;
-	virtual void OnCollisionStay() = 0;
-	virtual void OnCollisionExit() = 0;
+	virtual void Start() {};
+	virtual void Update() {};
+	virtual void Stop() {};
+
+	virtual void OnCollisionEnter() {};
+	virtual void OnCollisionStay() {};
+	virtual void OnCollisionExit() {};
 	
 	inline void SetParent(GameObject* newParent) { m_parent = newParent; }
 	inline GameObject* GetParent() { return m_parent; }
