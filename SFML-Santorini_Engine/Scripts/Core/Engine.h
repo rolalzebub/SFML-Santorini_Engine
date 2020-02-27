@@ -3,6 +3,9 @@
 #include "Manager.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+
+
+
 enum class ManagerMode {
 	AllUpdates,
 	FixedUpdateOnly
@@ -12,7 +15,7 @@ class Engine
 {
 private:
 	static Engine* instance;
-	sf::RenderWindow* m_window;
+	std::shared_ptr<sf::RenderWindow> m_window;
 
 
 	sf::Clock engineClock;
@@ -35,5 +38,5 @@ public:
 	void Stop();
 
 	void AddManager(Manager* manager, ManagerMode mode);
-
+	
 };

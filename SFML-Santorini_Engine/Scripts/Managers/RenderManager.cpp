@@ -16,6 +16,8 @@ RenderManager& RenderManager::Instance()
 
 void RenderManager::Start()
 {
+	//Create window and assign it to the renderer
+	m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(DEFAULT_WIDTH, DEFAULT_HEIGHT), "SANTORINI");
 }
 
 void RenderManager::Update()

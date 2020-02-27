@@ -16,8 +16,7 @@ void Engine::Start()
 {
 	engineClock.restart();
 
-	//Create window and assign it to the renderer
-	//sf::RenderWindow new_window;
+	Renderer.Start();
 
 	for (auto& m : managers_toUpdate) {
 		m->Start();
@@ -27,28 +26,38 @@ void Engine::Start()
 		m->Start();
 	}
 
+	m_window = Renderer.GetWindowReference();
+
 }
 
 void Engine::Update()
 {	
+
+
 	frameDeltaTime = engineClock.getElapsedTime() - elapsedTime;
 	timeSinceLastFixedUpdate += frameDeltaTime;
-
-	for (auto& m : managers_toUpdate) {
-		m->Update();
-	}
-
-	if (timeSinceLastFixedUpdate >= fixedUpdateInterval) {
+	sf::Event e;
+	while (m_window->isOpen())
+	{
+		m_window->pollEvent(e);
 		for (auto& m : managers_toUpdate) {
-			m->FixedUpdate();
-		}
-		for (auto& m : managers_toFixedUpdateOnly) {
 			m->Update();
-			m->FixedUpdate();
 		}
-		timeSinceLastFixedUpdate = sf::Time::Zero;
-	}
 
+		if (timeSinceLastFixedUpdate >= fixedUpdateInterval) {
+			for (auto& m : managers_toUpdate) {
+				m->FixedUpdate();
+			}
+			for (auto& m : managers_toFixedUpdateOnly) {
+				m->Update();
+				m->FixedUpdate();
+			}
+			timeSinceLastFixedUpdate = sf::Time::Zero;
+		}
+
+		if (e.type == sf::Event::EventType::Closed)
+			m_window->close();
+	}
 	elapsedTime += engineClock.getElapsedTime() - (elapsedTime + frameDeltaTime);
 }
 
