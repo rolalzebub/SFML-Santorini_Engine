@@ -172,7 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Components\Sprite.h" />
-    <ClInclude Include="Scripts\Components\Transform.h" />
     <ClInclude Include="Scripts\Core\Component.h" />
     <ClInclude Include="Scripts\Core\Engine.h" />
     <ClInclude Include="Scripts\Core\GameObject.h" />

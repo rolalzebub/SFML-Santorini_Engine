@@ -89,9 +89,6 @@
     <ClInclude Include="Scripts\Components\Sprite.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Components\Transform.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Managers\GameManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>

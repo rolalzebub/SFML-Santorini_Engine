@@ -2,15 +2,13 @@
 
 GameObject::GameObject()
 {
-	m_transform = makeUPtr<Transform>(this);
-	AddComponent(m_transform.get());
+	m_transform = makeUPtr<sf::Transformable>();
 }
 
 GameObject::GameObject(GameObject* parent)
 {
 	m_parent = parent;
-	m_transform = makeUPtr<Transform>(this);
-	AddComponent(m_transform.get());
+	m_transform = makeUPtr<sf::Transformable>();
 }
 
 GameObject::~GameObject()
@@ -22,7 +20,7 @@ void GameObject::AddComponent(Component* comp) {
 	m_components.push_back(comp);
 }
 
-Transform* GameObject::GetTransform()
+sf::Transformable* GameObject::GetTransform()
 {
 	return m_transform.get();
 }

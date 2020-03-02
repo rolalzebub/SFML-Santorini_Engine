@@ -11,7 +11,6 @@ private:
 
 	uPtr<sf::Sprite> m_spriteTexture;
 	int spriteIndex = -1;
-	Transform* m_parentTransform;
 
 public:
 	Sprite(GameObject* parent);

@@ -1,7 +1,8 @@
 #pragma once
 #include "Core/utility_headers.h"
-#include "Components/Transform.h"
-class GameObject
+#include "Core/Component.h"
+#include "SFML/Graphics/Transformable.hpp"
+class GameObject: public sf::Transformable
 {
 protected:
 
@@ -9,7 +10,6 @@ protected:
 	std::vector<Component*> m_components;
 	std::vector<GameObject*> m_children;
 	
-	uPtr<Transform> m_transform;
 
 public:
 	GameObject();
@@ -30,7 +30,7 @@ public:
 	inline void AddChild(GameObject* child) { m_children.push_back(child); }
 	void AddComponent(Component* comp);
 
-	Transform* GetTransform();
+	sf::Transformable* GetTransform();
 
 };
 

@@ -1,10 +1,8 @@
 #include "Sprite.h"
 #include "Core/GameObject.h"
-#include "Transform.h"
 #include "Managers/RenderManager.h"
 Sprite::Sprite(GameObject* parent) : Component(parent)
 {
-	m_parentTransform = m_parent->GetTransform();
 }
 
 void Sprite::OnStart()
@@ -14,9 +12,7 @@ void Sprite::OnStart()
 
 void Sprite::OnUpdate()
 {
-	m_spriteTexture->setPosition(m_parentTransform->getPosition());
-	m_spriteTexture->setRotation(m_parentTransform->getRotation());
-	m_spriteTexture->setScale(m_parentTransform->getScale());
+
 }
 
 void Sprite::Stop()
