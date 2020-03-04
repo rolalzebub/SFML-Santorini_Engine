@@ -7,7 +7,7 @@ class GameObject: public sf::Transformable
 protected:
 
 	GameObject* m_parent = nullptr;
-	std::vector<Component*> m_components;
+	/*std::vector<Component*> m_components;*/
 	std::vector<GameObject*> m_children;
 	
 
@@ -28,9 +28,8 @@ public:
 	inline GameObject* GetParent() { return m_parent; }
 
 	inline void AddChild(GameObject* child) { m_children.push_back(child); }
-	void AddComponent(Component* comp);
+	/*void AddComponent(Component* comp);*/
 
-	sf::Transformable* GetTransform();
 
 };
 

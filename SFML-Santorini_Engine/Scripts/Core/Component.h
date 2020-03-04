@@ -11,7 +11,9 @@ public:
 	virtual void OnUpdate() = 0;
 	virtual void Stop() = 0;
 
-	void SetParent(GameObject* newParent) { m_parent = newParent; }
+	void SetParent(GameObject* newParent) {
+		m_parent = newParent;
+	}
 	GameObject* GetParent() { return m_parent; }
 
 	Component(GameObject* parent) { m_parent = parent; }

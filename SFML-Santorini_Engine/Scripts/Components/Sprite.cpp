@@ -12,7 +12,8 @@ void Sprite::OnStart()
 
 void Sprite::OnUpdate()
 {
-
+	m_spriteTexture->setPosition(m_parent->getPosition());
+	m_spriteTexture->setRotation(m_parent->getRotation());
 }
 
 void Sprite::Stop()

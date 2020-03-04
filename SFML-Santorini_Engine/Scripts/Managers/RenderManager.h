@@ -2,9 +2,6 @@
 #include "Core/Manager.h"
 #include "SFML/Graphics.hpp"
 
-#define DEFAULT_HEIGHT 600
-#define DEFAULT_WIDTH 800
-
 class Sprite;
 
 #define Renderer RenderManager::Instance()
@@ -14,8 +11,9 @@ class RenderManager :
 private:
 	static RenderManager* instance;
 	
-	std::shared_ptr<sf::RenderWindow> m_window;
+	sf::RenderWindow* m_window;
 	std::vector<Sprite*> m_sprites;
+	std::vector<sf::Drawable*> m_drawables;
 
 	void Render(sf::Drawable* object, const sf::Vector2f& position);
 
@@ -29,7 +27,8 @@ public:
 	void Stop() override;
 	
 	void AddSprite(Sprite* sp) { m_sprites.push_back(sp); };
+	void AddDrawable(sf::Drawable* dr);
 	
-	std::shared_ptr<sf::RenderWindow> GetWindowReference() { return m_window; }
+	void SetWindow(sf::RenderWindow* window) { m_window = window; }
 };
 

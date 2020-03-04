@@ -16,17 +16,25 @@ RenderManager& RenderManager::Instance()
 
 void RenderManager::Start()
 {
-	//Create window and assign it to the renderer
-	m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(DEFAULT_WIDTH, DEFAULT_HEIGHT), "SANTORINI");
+	
 }
 
 void RenderManager::Update()
 {
+	for (auto& dr : m_drawables) {
+		m_window->draw(*dr);
+	}
 	for (auto& sp : m_sprites) {
+		sp->OnUpdate();
 		m_window->draw(*sp->GetSprite());
 	}
 }
 
 void RenderManager::Stop()
 {
+}
+
+void RenderManager::AddDrawable(sf::Drawable* dr)
+{
+	m_drawables.push_back(dr);
 }

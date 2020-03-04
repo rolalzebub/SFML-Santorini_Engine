@@ -1,12 +1,12 @@
 #pragma once
 #include "Core/utility_headers.h"
 #include "gameTile.h"
+#include "P_Builder.h"
 class GameLevel
 {
 	class GameManager;
-    class P_Builder;
 private:
-    GameManager* g;
+    GameManager* g = nullptr;
 
     //2-4 players
     int m_numPlayers = 2;
@@ -15,7 +15,7 @@ private:
     gameTile tiles[5][5];
     std::vector<P_Builder> builders;
 
-    unsigned short turn;
+    unsigned short turn = 0;
     void place();
     void selectBuilder();
 
@@ -25,6 +25,6 @@ public:
     void update();
     void setup();
 
-    //std::vector<sf::Drawable*> GetActiveObjects();
+    std::vector<GameObject*> GetActiveGameObjects();
 
 };

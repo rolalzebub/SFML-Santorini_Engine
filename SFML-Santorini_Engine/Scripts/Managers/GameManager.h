@@ -1,6 +1,9 @@
 #pragma once
 #include "Core/Manager.h"
 #include "Game/GameLevel.h"
+
+#define Game GameManager::Instance()
+
 class GameManager :
 	public Manager
 {
@@ -13,9 +16,16 @@ class GameManager :
     };
 
 private:
+    static GameManager* instance;
+
     GameLevel level;
 
+    std::vector<GameObject*> activeObjects;
+
+    GameManager() {};
+
 public:
+    static GameManager& Instance();
     void Start() override;
     void Update() override;
     void FixedUpdate() override;

@@ -1,5 +1,6 @@
 #include "Core/Engine.h"
 #include "Managers/RenderManager.h"
+#include "Managers/GameManager.h"
 
 
 Engine* Engine::instance{ nullptr };
@@ -14,67 +15,45 @@ Engine& Engine::Instance()
 
 void Engine::Start()
 {
+	m_window.create(sf::VideoMode(DEFAULT_WIDTH, DEFAULT_HEIGHT), "Santorini");
 	engineClock.restart();
 
 	Renderer.Start();
-
-	for (auto& m : managers_toUpdate) {
-		m->Start();
-	}
-
-	for (auto& m : managers_toFixedUpdateOnly) {
-		m->Start();
-	}
-
-	m_window = Renderer.GetWindowReference();
-
+	Game.Start();
+	Renderer.SetWindow(&m_window);
 }
 
 void Engine::Update()
 {	
-
-
 	frameDeltaTime = engineClock.getElapsedTime() - elapsedTime;
 	timeSinceLastFixedUpdate += frameDeltaTime;
-	sf::Event e;
-	while (m_window->isOpen())
-	{
-		m_window->pollEvent(e);
-		for (auto& m : managers_toUpdate) {
-			m->Update();
-		}
 
+	sf::Event e;
+	while (m_window.isOpen())
+	{
+		m_window.pollEvent(e);
+		
+		m_window.clear();
+		
+		Game.Update();
+		Renderer.Update();
 		if (timeSinceLastFixedUpdate >= fixedUpdateInterval) {
-			for (auto& m : managers_toUpdate) {
-				m->FixedUpdate();
-			}
-			for (auto& m : managers_toFixedUpdateOnly) {
-				m->Update();
-				m->FixedUpdate();
-			}
+			
 			timeSinceLastFixedUpdate = sf::Time::Zero;
+
+			Game.FixedUpdate();
+			Renderer.FixedUpdate();
 		}
 
 		if (e.type == sf::Event::EventType::Closed)
-			m_window->close();
+			m_window.close();
+
+		m_window.display();
 	}
 	elapsedTime += engineClock.getElapsedTime() - (elapsedTime + frameDeltaTime);
 }
 
 void Engine::Stop()
 {
-	for (auto& m : managers_toUpdate) {
-		m->Stop();
-	}
-	for (auto& m : managers_toFixedUpdateOnly) {
-		m->Stop();
-	}
-}
-
-void Engine::AddManager(Manager* manager, ManagerMode mode)
-{
-	if (mode == ManagerMode::AllUpdates)
-		managers_toUpdate.push_back(manager);
-
-	else managers_toFixedUpdateOnly.push_back(manager);
+	
 }
