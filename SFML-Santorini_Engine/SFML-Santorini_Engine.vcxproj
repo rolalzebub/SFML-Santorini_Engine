@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Scripts\Components\Sprite.cpp" />
     <ClCompile Include="Scripts\Core\Engine.cpp" />
     <ClCompile Include="Scripts\Core\GameObject.cpp" />
@@ -175,12 +176,14 @@
     <ClInclude Include="Scripts\Core\Component.h" />
     <ClInclude Include="Scripts\Core\Engine.h" />
     <ClInclude Include="Scripts\Core\GameObject.h" />
+    <ClInclude Include="Scripts\Core\Level.h" />
     <ClInclude Include="Scripts\Core\Manager.h" />
     <ClInclude Include="Scripts\Core\utility_headers.h" />
     <ClInclude Include="Scripts\Game\GameLevel.h" />
     <ClInclude Include="Scripts\Game\gameTile.h" />
     <ClInclude Include="Scripts\Game\P_Builder.h" />
     <ClInclude Include="Scripts\Managers\GameManager.h" />
+    <ClInclude Include="Scripts\Managers\InputManager.h" />
     <ClInclude Include="Scripts\Managers\RenderManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

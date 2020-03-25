@@ -10,6 +10,9 @@ private:
     sf::RectangleShape tileBase;
 
 public:
+
+    gameTile();
+
     bool build();
     unsigned short level = 0;
 
@@ -19,5 +22,7 @@ public:
     void OnCollisionEnter() override {};
     void OnCollisionStay() override {};
     void OnCollisionExit() override {};
+
+    sf::Vector2f GetSize();
 };
 

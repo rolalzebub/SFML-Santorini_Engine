@@ -35,6 +35,23 @@
 //    }
 //}
 
+gameTile::gameTile()
+{
+    tileBase.setOutlineThickness(5);
+    sf::Color cOutline;
+    sf::Color cFill;
+    cOutline = sf::Color(0xf2f0e6ff);
+    cFill = sf::Color(0xdfd8bfff);
+
+    cFill = sf::Color(0x769D66ff);
+    tileBase.setSize(sf::Vector2f(110, 110));
+    
+    tileBase.setFillColor(cFill);
+
+
+    Renderer.AddDrawable(&tileBase);
+}
+
 bool gameTile::build()
 {
     /*std::cout << "Build: " << m_transform->getPosition().x << " " << m_transform->getPosition().y << " " << level << std::endl;
@@ -49,7 +66,8 @@ bool gameTile::build()
 
 void gameTile::Start()
 {
-    tileBase.setOutlineThickness(5);
+    tileBase.setPosition(getPosition());
+    /*tileBase.setOutlineThickness(5);
     sf::Color cOutline;
     sf::Color cFill;
     cOutline = sf::Color(0xf2f0e6ff);
@@ -57,8 +75,7 @@ void gameTile::Start()
 
     cFill = sf::Color(0x769D66ff);
     tileBase.setSize(sf::Vector2f(110, 110));
-    tileBase.setPosition(getPosition().x * 120 + 5, getPosition().y * 120 + 5);
-    tileBase.setFillColor(cFill);
+    tileBase.setFillColor(cFill);*/
 
     //if (level == 0) {
     //    cFill = sf::Color(0x769D66ff);
@@ -83,7 +100,6 @@ void gameTile::Start()
         w.draw(circle);
     }*/
 
-    Renderer.AddDrawable(&tileBase);
 }
 
 void gameTile::Update()
@@ -92,4 +108,9 @@ void gameTile::Update()
 
 void gameTile::Stop()
 {
+}
+
+sf::Vector2f gameTile::GetSize()
+{
+    return tileBase.getSize();
 }

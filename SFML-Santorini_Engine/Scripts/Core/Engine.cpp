@@ -1,7 +1,7 @@
 #include "Core/Engine.h"
 #include "Managers/RenderManager.h"
 #include "Managers/GameManager.h"
-
+#include "Managers/InputManager.h"
 
 Engine* Engine::instance{ nullptr };
 
@@ -18,9 +18,11 @@ void Engine::Start()
 	m_window.create(sf::VideoMode(DEFAULT_WIDTH, DEFAULT_HEIGHT), "Santorini");
 	engineClock.restart();
 
-	Renderer.Start();
 	Game.Start();
+	Renderer.Start();
 	Renderer.SetWindow(&m_window);
+	Input.Start();
+	Input.SetInputWindow(&m_window);
 }
 
 void Engine::Update()
@@ -31,22 +33,23 @@ void Engine::Update()
 	sf::Event e;
 	while (m_window.isOpen())
 	{
-		m_window.pollEvent(e);
-		
+		while (m_window.pollEvent(e))
+		{
+
+			if (e.type == sf::Event::EventType::Closed)
+				m_window.close();
+		}
 		m_window.clear();
-		
+
 		Game.Update();
 		Renderer.Update();
 		if (timeSinceLastFixedUpdate >= fixedUpdateInterval) {
-			
+
 			timeSinceLastFixedUpdate = sf::Time::Zero;
 
 			Game.FixedUpdate();
 			Renderer.FixedUpdate();
 		}
-
-		if (e.type == sf::Event::EventType::Closed)
-			m_window.close();
 
 		m_window.display();
 	}

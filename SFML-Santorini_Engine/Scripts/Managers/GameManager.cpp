@@ -10,21 +10,20 @@ GameManager& GameManager::Instance()
 
 void GameManager::Start()
 {
-	level.setup();
+	level.Start();
 }
 
 void GameManager::Update()
 {
-	for (auto ob : activeObjects) {
-		ob->Update();
-	}
+	level.Update();
 }
 
 void GameManager::FixedUpdate()
 {
-	activeObjects = level.GetActiveGameObjects();
+	level.FixedUpdate();
 }
 
 void GameManager::Stop()
 {
+	level.Stop();
 }

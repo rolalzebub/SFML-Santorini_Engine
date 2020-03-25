@@ -7,20 +7,12 @@
 class GameManager :
 	public Manager
 {
-    enum class gamestate {
-        place,
-        play,
-        victory,
-        defeat,
-        terminate
-    };
+    
 
 private:
     static GameManager* instance;
 
     GameLevel level;
-
-    std::vector<GameObject*> activeObjects;
 
     GameManager() {};
 
