@@ -2,6 +2,7 @@
 #include "Managers/RenderManager.h"
 #include "Managers/GameManager.h"
 #include "Managers/InputManager.h"
+#include "Managers/UIManager.h"
 
 Engine* Engine::instance{ nullptr };
 
@@ -19,6 +20,7 @@ void Engine::Start()
 	engineClock.restart();
 
 	Game.Start();
+	UI_Manager.Start();
 	Renderer.Start();
 	Renderer.SetWindow(&m_window);
 	Input.Start();
@@ -42,12 +44,14 @@ void Engine::Update()
 		m_window.clear();
 
 		Game.Update();
+		UI_Manager.Update();
 		Renderer.Update();
 		if (timeSinceLastFixedUpdate >= fixedUpdateInterval) {
 
 			timeSinceLastFixedUpdate = sf::Time::Zero;
 
 			Game.FixedUpdate();
+			UI_Manager.FixedUpdate();
 			Renderer.FixedUpdate();
 		}
 

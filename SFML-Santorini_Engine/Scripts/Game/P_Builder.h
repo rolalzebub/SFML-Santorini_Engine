@@ -11,7 +11,7 @@ private:
 	uPtr<Sprite> builderSprite;
 	sf::CircleShape builderCircle;
 	const std::string sprite_path = "Data/builder_M.png";
-	unsigned short player = 0;
+	short owner_player_levelID = -1;
 
 public:
 	P_Builder() :GameObject() {};

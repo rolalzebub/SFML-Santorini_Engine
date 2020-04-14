@@ -11,14 +11,13 @@ class RenderManager :
 private:
 	static RenderManager* instance;
 	
-	sf::RenderWindow* m_window;
+	sf::RenderWindow* m_window = nullptr;
 	std::vector<Sprite*> m_sprites;
 	std::vector<sf::Drawable*> m_drawables;
 
 	void Render(sf::Drawable* object, const sf::Vector2f& position);
 
-	RenderManager() { m_window = nullptr; };
-
+	
 public:
 	static RenderManager& Instance();
 	void Start() override;
@@ -26,9 +25,14 @@ public:
 	void FixedUpdate() override {};
 	void Stop() override;
 	
-	void AddSprite(Sprite* sp) { m_sprites.push_back(sp); };
-	void AddDrawable(sf::Drawable* dr);
+	int AddSprite(Sprite* sp);
+	int AddDrawable(sf::Drawable* dr);
 	
 	void SetWindow(sf::RenderWindow* window) { m_window = window; }
+
+	void DeleteSprite(int index);
+	void DeleteDrawable(int index);
+
+	void ClearUI();
 };
 

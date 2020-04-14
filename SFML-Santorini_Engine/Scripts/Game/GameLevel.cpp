@@ -69,6 +69,15 @@ void GameLevel::place()
                 if (mouse_pos.x >= currentTilePos.x && mouse_pos.x <= currentTilePos.x + tiles[i][j].GetSize().x) {
                     if (mouse_pos.y >= currentTilePos.y && mouse_pos.y <= currentTilePos.y + tiles[i][j].GetSize().y) {
                         std::cout << "Placed builder at " << currentTilePos.x << " " << currentTilePos.y << std::endl;
+
+                        //Create new P_Builder on the tile
+
+
+                        //Assign ownership to player whose turn it is
+
+
+                        //If player is done placing all builders, progress to next turn
+
                     }
                 }
             }

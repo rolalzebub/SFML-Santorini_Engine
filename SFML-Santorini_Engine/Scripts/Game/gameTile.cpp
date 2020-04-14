@@ -49,7 +49,6 @@ gameTile::gameTile()
     tileBase.setFillColor(cFill);
 
 
-    Renderer.AddDrawable(&tileBase);
 }
 
 bool gameTile::build()
@@ -100,6 +99,7 @@ void gameTile::Start()
         w.draw(circle);
     }*/
 
+    Renderer.AddDrawable(&tileBase);
 }
 
 void gameTile::Update()

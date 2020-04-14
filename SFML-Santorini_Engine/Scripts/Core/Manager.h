@@ -1,5 +1,7 @@
 #pragma once
 #include "utility_headers.h"
+
+
 class Manager
 {
 

@@ -161,30 +161,39 @@
   <ItemGroup>
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Scripts\Components\Sprite.cpp" />
+    <ClCompile Include="Scripts\Core\Button.cpp" />
     <ClCompile Include="Scripts\Core\Engine.cpp" />
     <ClCompile Include="Scripts\Core\GameObject.cpp" />
     <ClCompile Include="Scripts\Core\Manager.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\PlayButton.cpp" />
     <ClCompile Include="Scripts\Game\GameLevel.cpp" />
     <ClCompile Include="Scripts\Game\gameTile.cpp" />
+    <ClCompile Include="Scripts\Game\Levels\MainMenu.cpp" />
     <ClCompile Include="Scripts\Game\P_Builder.cpp" />
     <ClCompile Include="Scripts\Managers\GameManager.cpp" />
     <ClCompile Include="Scripts\Managers\RenderManager.cpp" />
+    <ClCompile Include="Scripts\Managers\UIManager.cpp" />
     <ClCompile Include="SFML-Santorini_Engine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Components\Sprite.h" />
+    <ClInclude Include="Scripts\Core\Button.h" />
     <ClInclude Include="Scripts\Core\Component.h" />
     <ClInclude Include="Scripts\Core\Engine.h" />
     <ClInclude Include="Scripts\Core\GameObject.h" />
     <ClInclude Include="Scripts\Core\Level.h" />
     <ClInclude Include="Scripts\Core\Manager.h" />
+    <ClInclude Include="Scripts\Core\UIObject.h" />
     <ClInclude Include="Scripts\Core\utility_headers.h" />
+    <ClInclude Include="Scripts\Game\Buttons\PlayButton.h" />
     <ClInclude Include="Scripts\Game\GameLevel.h" />
     <ClInclude Include="Scripts\Game\gameTile.h" />
+    <ClInclude Include="Scripts\Game\Levels\MainMenu.h" />
     <ClInclude Include="Scripts\Game\P_Builder.h" />
     <ClInclude Include="Scripts\Managers\GameManager.h" />
     <ClInclude Include="Scripts\Managers\InputManager.h" />
     <ClInclude Include="Scripts\Managers\RenderManager.h" />
+    <ClInclude Include="Scripts\Managers\UIManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

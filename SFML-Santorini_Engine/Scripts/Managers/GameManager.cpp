@@ -10,20 +10,37 @@ GameManager& GameManager::Instance()
 
 void GameManager::Start()
 {
-	level.Start();
+	currentLevel = &mainMenu;
+	currentLevel->Start();
 }
 
 void GameManager::Update()
 {
-	level.Update();
+	currentLevel->Update();
 }
 
 void GameManager::FixedUpdate()
 {
-	level.FixedUpdate();
+	currentLevel->FixedUpdate();
 }
 
 void GameManager::Stop()
 {
-	level.Stop();
+	currentLevel->Stop();
+}
+
+void GameManager::GoToMainMenu()
+{
+	currentLevel = &mainMenu;
+}
+
+void GameManager::StartPlayLevel()
+{
+	currentLevel = &level;
+	currentLevel->Start();
+}
+
+void GameManager::StopLevel()
+{
+	currentLevel->Stop();
 }
