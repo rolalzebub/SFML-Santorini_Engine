@@ -2,14 +2,20 @@
 #include "Managers/RenderManager.h"
 void P_Builder::Start()
 {
-    builderCircle.setRadius(1);
-    builderCircle.setScale(10, 10);
+    builderCircle.setRadius(10);
+    builderCircle.setScale(1, 1);
 
 
-    builderSprite = makeUPtr<Sprite>(this);
-    builderSprite->LoadTexture(sprite_path);
-    Renderer.AddSprite(builderSprite.get());
+    //builderSprite = makeUPtr<Sprite>(this);
+    //builderSprite->LoadTexture(sprite_path);
+    //Renderer.AddSprite(builderSprite.get());
     Renderer.AddDrawable(&builderCircle);
+    builderCircle.setPosition(this->getPosition());
+}
+
+void P_Builder::Update()
+{
+    builderCircle.setPosition(this->getPosition());
 }
 
 void P_Builder::move(unsigned short i, unsigned short j)
@@ -19,4 +25,18 @@ void P_Builder::move(unsigned short i, unsigned short j)
 
 void P_Builder::PlaceSelf(sf::Vector2f position)
 {
+}
+
+void P_Builder::HighlightGreen()
+{
+    if (builderCircle.getFillColor() != sf::Color::Green) {
+        builderCircle.setFillColor(sf::Color::Green);
+    }
+}
+
+void P_Builder::HighlightRed()
+{
+    if (builderCircle.getFillColor() != sf::Color::Red) {
+        builderCircle.setFillColor(sf::Color::Red);
+    }
 }

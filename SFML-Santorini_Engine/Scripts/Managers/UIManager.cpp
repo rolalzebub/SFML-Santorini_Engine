@@ -22,7 +22,7 @@ void UIManager::Start()
 void UIManager::Update()
 {
 
-	if (Input.IsMouseLeftPressed()) {
+	if (Input.IsMouseLeftReleased()) {
 		for (auto& obj : UI_Objects) {
 			mousePos = Input.GetMousePosition();
 

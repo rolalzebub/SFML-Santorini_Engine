@@ -11,9 +11,16 @@
 class InputManager :
 	public Manager
 {
+private:
 	static InputManager* instance;
 
 	sf::RenderWindow* m_InputWindow;
+
+	bool mouseLeft_LastState;
+	bool mouseRight_LastState;
+
+	bool mouseLeft_Released;
+	bool mouseRight_Released;
 
 	InputManager() {};
 
@@ -21,13 +28,18 @@ public:
 	static InputManager& Instance();
 	void Start() override;
 	void Stop() override;
+	void Update() override;
 
 	void SetInputWindow(sf::RenderWindow* new_window) { m_InputWindow = new_window; }
 
 	bool IsMouseLeftPressed();
 	bool IsMouseRightPressed();
 
+	bool IsMouseLeftReleased();
+	bool IsMouseRightReleased();
+
 	sf::Vector2i GetMousePosition();
+
 	
 };
 

@@ -2,12 +2,14 @@
 #include "Core/utility_headers.h"
 #include "gameTile.h"
 #include "Core/Level.h"
+#include <unordered_map>
 
 #define MAX_PLAYERS 4
 
 enum class gamestate {
     place,
-    play,
+    selecting_builder,
+    moving_builder,
     victory,
     defeat,
     terminate
@@ -25,9 +27,7 @@ private:
     //2-4 players
     int m_numPlayers = 2;
 
-    
-    
-    
+    bool firstBuilderPlaced = false;
     gameTile tiles[5][5];
     std::vector<P_Builder*> builders;
     gamestate current_State;
@@ -36,9 +36,8 @@ private:
     void place();
     void selectBuilder();
     void playRound();
+    void ShowAvailableMoveSpacesForBuilder(P_Builder* builder);
 public:
-    /*world(sf::RenderWindow& w, GameManager* g);
-    ~world();*/
     void update();
     void setup();
 

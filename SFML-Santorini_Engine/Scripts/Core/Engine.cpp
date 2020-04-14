@@ -37,12 +37,12 @@ void Engine::Update()
 	{
 		while (m_window.pollEvent(e))
 		{
-
 			if (e.type == sf::Event::EventType::Closed)
 				m_window.close();
 		}
 		m_window.clear();
 
+		Input.Update();
 		Game.Update();
 		UI_Manager.Update();
 		Renderer.Update();

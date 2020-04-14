@@ -17,9 +17,14 @@ public:
 	P_Builder() :GameObject() {};
 
 	void Start() override;
-	//void draw(sf::RenderWindow& window);
+	void Update() override;
 	void move(unsigned short i, unsigned short j);
 
 	void PlaceSelf(sf::Vector2f position);
+
+	int GetOwnerID() { return (int) owner_player_levelID; }
+	void SetOwnerID(int index) { owner_player_levelID = (short) index; }
+	void HighlightGreen();
+	void HighlightRed();
 };
 

@@ -24,5 +24,9 @@ public:
     void OnCollisionExit() override {};
 
     sf::Vector2f GetSize();
+
+    void HighlightGreen();
+    void HighlightRed();
+
 };
 
