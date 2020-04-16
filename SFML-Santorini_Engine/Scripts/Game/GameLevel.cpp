@@ -129,6 +129,10 @@ void GameLevel::selectBuilder()
 
                         for (auto& b : builders) {
                             if (currentTilePos == b->getPosition()) {
+
+                                if (b->GetOwnerID() != turn)
+                                    continue;
+
                                 b->HighlightRed();
                                 ShowAvailableMoveSpacesForBuilder(b);
                                 current_State = gamestate::moving_builder;
@@ -149,10 +153,24 @@ void GameLevel::buildPhase()
 
 void GameLevel::movePhase()
 {
+    if (Input.IsMouseRightReleased()) {
+        current_State = gamestate::selecting_builder;
+        for (int i = 0; i < GRID_COLS; i++) {
+            for (int j = 0; j < GRID_ROWS; j++) {
+                tiles[i][j].UnHighlight();
+            }
+        }
+        for (auto& b : builders) {
+            b->UnHighlight();
+        }
+
+        return;
+    }
 }
 
 void GameLevel::ShowAvailableMoveSpacesForBuilder(P_Builder* builder)
 {
+
     for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
 
@@ -165,7 +183,16 @@ void GameLevel::ShowAvailableMoveSpacesForBuilder(P_Builder* builder)
                 for (int i = 0; i < GRID_COLS; i++) {
                     for (int j = 0; j < GRID_ROWS; j++) {
                         if (tiles[i][j].getPosition() == positionToCompare) {
-                            tiles[i][j].HighlightGreen();
+                            bool skipTile = false;
+                            for (auto& b : builders) {
+                                if (skipTile == true)
+                                    break;
+
+                                if (b->getPosition() == positionToCompare)
+                                    skipTile = true;
+                            }
+                            if(skipTile == false)
+                                tiles[i][j].HighlightGreen();
                         }
                     }
                 }

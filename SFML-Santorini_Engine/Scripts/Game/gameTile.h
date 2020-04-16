@@ -8,7 +8,7 @@ class gameTile :
 {
 private:
     sf::RectangleShape tileBase;
-
+    sf::Color baseColour;
 public:
 
     gameTile();
@@ -27,6 +27,6 @@ public:
 
     void HighlightGreen();
     void HighlightRed();
-
+    void UnHighlight();
 };
 

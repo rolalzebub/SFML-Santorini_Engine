@@ -6,14 +6,12 @@ gameTile::gameTile()
     
     tileBase.setOutlineThickness(5);
     sf::Color cOutline;
-    sf::Color cFill;
     cOutline = sf::Color(0xf2f0e6ff);
-    cFill = sf::Color(0xdfd8bfff);
 
-    cFill = sf::Color(0x769D66ff);
+    baseColour = sf::Color(0x769D66ff);
     tileBase.setSize(sf::Vector2f(110, 110));
 
-    tileBase.setFillColor(cFill);
+    tileBase.setFillColor(baseColour);
 
 }
 
@@ -57,4 +55,9 @@ void gameTile::HighlightRed()
     if (tileBase.getFillColor() != sf::Color::Red) {
         tileBase.setFillColor(sf::Color::Red);
     }
+}
+
+void gameTile::UnHighlight()
+{
+    tileBase.setFillColor(baseColour);
 }
