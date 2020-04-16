@@ -16,6 +16,9 @@ void UIManager::Start()
 {
 	for (auto& obj : UI_Objects) {
 		obj->Start();
+		for (auto& dr : obj->GetDrawables()) {
+			Renderer.AddDrawable(dr);
+		}
 	}
 }
 

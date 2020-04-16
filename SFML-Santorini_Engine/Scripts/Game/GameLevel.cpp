@@ -4,8 +4,8 @@
 
 void GameLevel::setup()
 {
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
+    for (int i = 0; i < GRID_COLS; i++) {
+        for (int j = 0; j < GRID_ROWS; j++) {
             tiles[i][j].setPosition(sf::Vector2f(i * tiles[i][j].GetSize().x, j * tiles[i][j].GetSize().y));
             tiles[i][j].level = 0;
 
@@ -41,7 +41,12 @@ void GameLevel::Update()
             break;
         case gamestate::selecting_builder:
             selectBuilder();
-            playRound();
+            break;
+        case gamestate::moving_builder:
+            movePhase();
+            break;
+        case gamestate::building_piece:
+            buildPhase();
             break;
     }
 }
@@ -60,8 +65,8 @@ void GameLevel::place()
 
     if (Input.IsMouseLeftReleased()) {
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < GRID_COLS; i++) {
+            for (int j = 0; j < GRID_ROWS; j++) {
 
                 sf::Vector2f currentTilePos = tiles[i][j].getPosition();
 
@@ -114,8 +119,8 @@ void GameLevel::selectBuilder()
 
         sf::Vector2i mouse_pos = Input.GetMousePosition();
         
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < GRID_COLS; i++) {
+            for (int j = 0; j < GRID_ROWS; j++) {
 
                 sf::Vector2f currentTilePos = tiles[i][j].getPosition();
 
@@ -127,6 +132,7 @@ void GameLevel::selectBuilder()
                                 b->HighlightRed();
                                 ShowAvailableMoveSpacesForBuilder(b);
                                 current_State = gamestate::moving_builder;
+                                currently_selected_builder = b;
                             }
                         }
 
@@ -137,7 +143,11 @@ void GameLevel::selectBuilder()
     }
 }
 
-void GameLevel::playRound()
+void GameLevel::buildPhase()
+{
+}
+
+void GameLevel::movePhase()
 {
 }
 
@@ -146,15 +156,17 @@ void GameLevel::ShowAvailableMoveSpacesForBuilder(P_Builder* builder)
     for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
 
-            if (i != 0 && j != 0) {
+            if ((i == 0 && j == 0) == false) {
 
                 sf::Vector2f positionToCompare = builder->getPosition();
-                positionToCompare.x += i * tiles[0][0].GetSize().x;
-                positionToCompare.y += j * tiles[0][0].GetSize().y;
+                positionToCompare.x += j * tiles[0][0].GetSize().x;
+                positionToCompare.y += i * tiles[0][0].GetSize().y;
 
-                for (auto& g : tiles) {
-                    if (g->getPosition() == positionToCompare) {
-                        g->HighlightGreen();
+                for (int i = 0; i < GRID_COLS; i++) {
+                    for (int j = 0; j < GRID_ROWS; j++) {
+                        if (tiles[i][j].getPosition() == positionToCompare) {
+                            tiles[i][j].HighlightGreen();
+                        }
                     }
                 }
             }

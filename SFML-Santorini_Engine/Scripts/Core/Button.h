@@ -1,20 +1,16 @@
 #pragma once
-#include "SFML/Graphics.hpp"
 #include "Core/UIObject.h"
 
 class Button :
 	public UIObject
 {
+protected:
 	sf::Font button_TextFont;
 	sf::Text button_Text;
 	sf::RectangleShape button_Outline;
 	sf::Color button_FillColour;
-	
-	int Rid_buttonRect;		//Renderer id for button outline
-	int Rid_text;			//Renderer id for button text
 
 public:
-	void Start() override;
 	void Update() override;
 	virtual void OnClick() = 0;
 	void Stop() override;

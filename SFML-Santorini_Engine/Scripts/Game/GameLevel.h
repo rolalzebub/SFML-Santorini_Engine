@@ -2,14 +2,16 @@
 #include "Core/utility_headers.h"
 #include "gameTile.h"
 #include "Core/Level.h"
-#include <unordered_map>
 
 #define MAX_PLAYERS 4
+#define GRID_ROWS 5
+#define GRID_COLS 5
 
 enum class gamestate {
     place,
     selecting_builder,
     moving_builder,
+    building_piece,
     victory,
     defeat,
     terminate
@@ -32,10 +34,14 @@ private:
     std::vector<P_Builder*> builders;
     gamestate current_State;
 
+    P_Builder* currently_selected_builder;
+
     unsigned short turn = 0;
     void place();
     void selectBuilder();
-    void playRound();
+    void movePhase();
+    void buildPhase();
+    
     void ShowAvailableMoveSpacesForBuilder(P_Builder* builder);
 public:
     void update();

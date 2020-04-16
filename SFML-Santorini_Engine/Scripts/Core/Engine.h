@@ -31,5 +31,7 @@ public:
 
 	void Stop();
 
+	void CloseWindow();
+
 	
 };

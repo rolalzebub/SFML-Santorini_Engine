@@ -2,16 +2,12 @@
 #include "Managers/UIManager.h"
 void MainMenu::Start()
 {
-	playButton.setText("Play");
-	bool result = playButton.LoadFont("Data/Fonts/MontereyFLF.ttf");
-	playButton.SetFontColour(sf::Color::Black);
-	playButton.setSize(sf::Vector2f(100, 60));
-	playButton.SetFillColour(sf::Color::Green);
-
+	
 	playButton.setPosition(100, 100);
+	quitButton.setPosition(100, 300);
 
 	UI_Manager.AddUIObject(&playButton);
-	m_gameObjects.push_back(&playButton);
+	UI_Manager.AddUIObject(&quitButton);
 }
 
 void MainMenu::Update()

@@ -51,8 +51,8 @@ void Engine::Update()
 			timeSinceLastFixedUpdate = sf::Time::Zero;
 
 			Game.FixedUpdate();
-			UI_Manager.FixedUpdate();
 			Renderer.FixedUpdate();
+			Renderer.UpdateUI();
 		}
 
 		m_window.display();
@@ -63,4 +63,9 @@ void Engine::Update()
 void Engine::Stop()
 {
 	
+}
+
+void Engine::CloseWindow()
+{
+	m_window.close();
 }

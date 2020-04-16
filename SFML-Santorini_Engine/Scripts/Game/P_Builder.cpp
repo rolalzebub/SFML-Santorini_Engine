@@ -23,8 +23,11 @@ void P_Builder::move(unsigned short i, unsigned short j)
     setPosition(getPosition() + sf::Vector2f(i, j));
 }
 
-void P_Builder::PlaceSelf(sf::Vector2f position)
+void P_Builder::UnHighlight()
 {
+    if (builderCircle.getFillColor() != default_color) {
+        builderCircle.setFillColor(default_color);
+    }
 }
 
 void P_Builder::HighlightGreen()

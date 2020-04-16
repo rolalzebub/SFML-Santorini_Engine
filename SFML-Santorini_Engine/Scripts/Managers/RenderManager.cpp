@@ -34,6 +34,13 @@ void RenderManager::Stop()
 {
 }
 
+void RenderManager::UpdateUI()
+{
+	for (auto& dr : m_UIObjects) {
+		m_window->draw(*dr);
+	}
+}
+
 int RenderManager::AddSprite(Sprite* sp)
 {
 	m_sprites.push_back(sp);

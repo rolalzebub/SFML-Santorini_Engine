@@ -10,6 +10,7 @@ class P_Builder :
 private:
 	uPtr<Sprite> builderSprite;
 	sf::CircleShape builderCircle;
+	sf::Color default_color = sf::Color::White;
 	const std::string sprite_path = "Data/builder_M.png";
 	short owner_player_levelID = -1;
 
@@ -20,10 +21,10 @@ public:
 	void Update() override;
 	void move(unsigned short i, unsigned short j);
 
-	void PlaceSelf(sf::Vector2f position);
-
 	int GetOwnerID() { return (int) owner_player_levelID; }
 	void SetOwnerID(int index) { owner_player_levelID = (short) index; }
+
+	void UnHighlight();
 	void HighlightGreen();
 	void HighlightRed();
 };

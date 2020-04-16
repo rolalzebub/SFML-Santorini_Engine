@@ -26,7 +26,7 @@ private:
 
     Level* currentLevel;
 
-    GameManager() {};
+    GameManager() { currentLevel = nullptr; };
 
 public:
     static GameManager& Instance();
@@ -38,5 +38,6 @@ public:
     void GoToMainMenu();
     void StartPlayLevel();
     void StopLevel();
+    void QuitGame();
 };
 

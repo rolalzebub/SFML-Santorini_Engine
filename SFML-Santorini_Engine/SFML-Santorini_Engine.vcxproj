@@ -166,6 +166,7 @@
     <ClCompile Include="Scripts\Core\GameObject.cpp" />
     <ClCompile Include="Scripts\Core\Manager.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\PlayButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp" />
     <ClCompile Include="Scripts\Game\GameLevel.cpp" />
     <ClCompile Include="Scripts\Game\gameTile.cpp" />
     <ClCompile Include="Scripts\Game\Levels\MainMenu.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Scripts\Core\UIObject.h" />
     <ClInclude Include="Scripts\Core\utility_headers.h" />
     <ClInclude Include="Scripts\Game\Buttons\PlayButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\QuitButton.h" />
     <ClInclude Include="Scripts\Game\GameLevel.h" />
     <ClInclude Include="Scripts\Game\gameTile.h" />
     <ClInclude Include="Scripts\Game\Levels\MainMenu.h" />

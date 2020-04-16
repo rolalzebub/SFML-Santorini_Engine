@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "Core/Engine.h"
 GameManager* GameManager::instance{ nullptr };
 GameManager& GameManager::Instance()
 {
@@ -43,4 +44,9 @@ void GameManager::StartPlayLevel()
 void GameManager::StopLevel()
 {
 	currentLevel->Stop();
+}
+
+void GameManager::QuitGame()
+{
+	GetEngine.CloseWindow();
 }
