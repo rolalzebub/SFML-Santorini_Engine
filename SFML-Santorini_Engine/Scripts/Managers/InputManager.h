@@ -40,6 +40,8 @@ public:
 
 	sf::Vector2i GetMousePosition();
 
+	bool isKeyPressed(sf::Keyboard::Key key);
+
 	
 };
 

@@ -12,6 +12,8 @@ private:
 	uPtr<sf::Sprite> m_spriteTexture;
 	int spriteIndex = -1;
 
+	bool m_isDrawable = true;
+
 public:
 	Sprite(GameObject* parent);
 	~Sprite() = default;
@@ -22,6 +24,9 @@ public:
 
 	void LoadTexture(const std::string& path);
 	void SetTexture(const sf::Texture& texture);
+
+	bool isDrawable();
+	void isDrawable(bool draw);
 
 	sf::Sprite* GetSprite();
 };

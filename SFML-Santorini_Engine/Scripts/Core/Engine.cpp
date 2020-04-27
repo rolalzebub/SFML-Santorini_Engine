@@ -69,3 +69,8 @@ void Engine::CloseWindow()
 {
 	m_window.close();
 }
+
+sf::RenderWindow* Engine::GetRenderWindow()
+{
+	return &m_window;
+}

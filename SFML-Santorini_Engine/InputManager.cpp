@@ -44,7 +44,6 @@ void InputManager::Update()
 
 bool InputManager::IsMouseLeftPressed()
 {
-
 	return (sf::Mouse::isButtonPressed(sf::Mouse::Left));
 }
 
@@ -66,4 +65,9 @@ bool InputManager::IsMouseRightReleased()
 sf::Vector2i InputManager::GetMousePosition()
 {
 	return sf::Mouse::getPosition(*m_InputWindow);
+}
+
+bool InputManager::isKeyPressed(sf::Keyboard::Key key)
+{
+	return sf::Keyboard::isKeyPressed(key);
 }

@@ -1,5 +1,6 @@
 #include "RenderManager.h"
 #include "Components/Sprite.h"
+#include "Core/UIObject.h"
 RenderManager* RenderManager::instance{ nullptr };
 void RenderManager::Render(sf::Drawable* object, const sf::Vector2f& position)
 {
@@ -25,8 +26,11 @@ void RenderManager::Update()
 		m_window->draw(*dr);
 	}
 	for (auto* sp : m_sprites) {
-		sp->OnUpdate();
-		m_window->draw(*sp->GetSprite());
+		if (sp->isDrawable())
+		{
+			sp->OnUpdate();
+			m_window->draw(*sp->GetSprite());
+		}
 	}
 }
 
@@ -36,8 +40,10 @@ void RenderManager::Stop()
 
 void RenderManager::UpdateUI()
 {
-	for (auto& dr : m_UIObjects) {
-		m_window->draw(*dr);
+	for (auto& obj : m_UIObjects) {
+		if(obj->isDrawable())
+			for(auto& dr: obj->GetDrawables())
+				m_window->draw(*dr);
 	}
 }
 

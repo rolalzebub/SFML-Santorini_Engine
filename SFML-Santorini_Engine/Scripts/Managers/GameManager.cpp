@@ -50,3 +50,8 @@ void GameManager::QuitGame()
 {
 	GetEngine.CloseWindow();
 }
+
+Level* GameManager::GetCurrentLevel()
+{
+	return currentLevel;
+}

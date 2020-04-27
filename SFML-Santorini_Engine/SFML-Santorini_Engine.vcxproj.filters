@@ -78,13 +78,31 @@
     <ClCompile Include="Scripts\Game\Levels\MainMenu.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Core\Button.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Managers\UIManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="HostButton.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\UI\InputTextArea.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\CancelButton.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\ClientButton.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\Button.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\ConnectButton.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\BackButton.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,9 +152,6 @@
     <ClInclude Include="Scripts\Game\Buttons\PlayButton.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Core\Button.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Managers\UIManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -144,6 +159,27 @@
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\Game\Buttons\QuitButton.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\HostButton.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\UI\InputTextArea.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\CancelButton.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\ClientButton.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\Button.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\ConnectButton.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\BackButton.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

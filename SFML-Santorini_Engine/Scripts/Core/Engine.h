@@ -33,5 +33,5 @@ public:
 
 	void CloseWindow();
 
-	
+	sf::RenderWindow* GetRenderWindow();
 };

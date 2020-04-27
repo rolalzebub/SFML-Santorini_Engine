@@ -16,9 +16,7 @@ void UIManager::Start()
 {
 	for (auto& obj : UI_Objects) {
 		obj->Start();
-		for (auto& dr : obj->GetDrawables()) {
-			Renderer.AddDrawable(dr);
-		}
+		Renderer.AddUIObject(obj);
 	}
 }
 
@@ -27,15 +25,18 @@ void UIManager::Update()
 
 	if (Input.IsMouseLeftReleased()) {
 		for (auto& obj : UI_Objects) {
-			mousePos = Input.GetMousePosition();
+			if (obj->isDrawable()) {
 
-			sf::Vector2f obj_extents (100, 100);
-			sf::Vector2f obj_position = obj->getPosition();
-			if (mousePos.x >= obj_position.x &&
-				mousePos.x <= obj_position.x + obj_extents.x) {
-				if (mousePos.y >= obj_position.y &&
-					mousePos.y <= obj_position.y + obj_extents.y) {
-					obj->OnClick();
+				mousePos = Input.GetMousePosition();
+
+				sf::Vector2f obj_extents(100, 100);
+				sf::Vector2f obj_position = obj->getPosition();
+				if (mousePos.x >= obj_position.x &&
+					mousePos.x <= obj_position.x + obj_extents.x) {
+					if (mousePos.y >= obj_position.y &&
+						mousePos.y <= obj_position.y + obj_extents.y) {
+						obj->OnClick();
+					}
 				}
 			}
 		}

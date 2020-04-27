@@ -34,6 +34,16 @@ void Sprite::SetTexture(const sf::Texture& texture)
 	m_spriteTexture = makeUPtr<sf::Sprite>(texture);
 }
 
+bool Sprite::isDrawable()
+{
+	return m_isDrawable;
+}
+
+void Sprite::isDrawable(bool draw)
+{
+	m_isDrawable = draw;
+}
+
 sf::Sprite* Sprite::GetSprite()
 {
 	return m_spriteTexture.get();

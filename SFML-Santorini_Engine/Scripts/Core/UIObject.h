@@ -10,6 +10,8 @@ protected:
 
 	void AddDrawable(sf::Drawable* obj) { m_drawables.push_back(obj); }
 
+	bool m_isDrawable = true;
+
 public:
 	virtual void Start() override {};
 	virtual void OnClick() {};
@@ -18,6 +20,9 @@ public:
 
 	sf::Vector2f GetSize() { return m_size; }
 	void SetSize(sf::Vector2f size) { m_size = size; }
+
+	bool isDrawable() { return m_isDrawable; }
+	void isDrawable(bool draw) { m_isDrawable = draw; }
 
 	std::vector<sf::Drawable*> GetDrawables() { return m_drawables; }
 };

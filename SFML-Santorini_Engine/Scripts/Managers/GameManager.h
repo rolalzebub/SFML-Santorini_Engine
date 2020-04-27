@@ -39,5 +39,6 @@ public:
     void StartPlayLevel();
     void StopLevel();
     void QuitGame();
+    Level* GetCurrentLevel();
 };
 

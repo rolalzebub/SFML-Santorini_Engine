@@ -159,18 +159,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HostButton.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Scripts\Components\Sprite.cpp" />
     <ClCompile Include="Scripts\Core\Button.cpp" />
     <ClCompile Include="Scripts\Core\Engine.cpp" />
     <ClCompile Include="Scripts\Core\GameObject.cpp" />
     <ClCompile Include="Scripts\Core\Manager.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\BackButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\CancelButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\ClientButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\ConnectButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\PlayButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp" />
     <ClCompile Include="Scripts\Game\GameLevel.cpp" />
     <ClCompile Include="Scripts\Game\gameTile.cpp" />
     <ClCompile Include="Scripts\Game\Levels\MainMenu.cpp" />
     <ClCompile Include="Scripts\Game\P_Builder.cpp" />
+    <ClCompile Include="Scripts\Game\UI\InputTextArea.cpp" />
     <ClCompile Include="Scripts\Managers\GameManager.cpp" />
     <ClCompile Include="Scripts\Managers\RenderManager.cpp" />
     <ClCompile Include="Scripts\Managers\UIManager.cpp" />
@@ -186,12 +192,18 @@
     <ClInclude Include="Scripts\Core\Manager.h" />
     <ClInclude Include="Scripts\Core\UIObject.h" />
     <ClInclude Include="Scripts\Core\utility_headers.h" />
+    <ClInclude Include="Scripts\Game\Buttons\BackButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\CancelButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\ClientButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\ConnectButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\HostButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\PlayButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\QuitButton.h" />
     <ClInclude Include="Scripts\Game\GameLevel.h" />
     <ClInclude Include="Scripts\Game\gameTile.h" />
     <ClInclude Include="Scripts\Game\Levels\MainMenu.h" />
     <ClInclude Include="Scripts\Game\P_Builder.h" />
+    <ClInclude Include="Scripts\Game\UI\InputTextArea.h" />
     <ClInclude Include="Scripts\Managers\GameManager.h" />
     <ClInclude Include="Scripts\Managers\InputManager.h" />
     <ClInclude Include="Scripts\Managers\RenderManager.h" />
