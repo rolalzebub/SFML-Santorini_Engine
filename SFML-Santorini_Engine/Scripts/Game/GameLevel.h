@@ -8,6 +8,7 @@
 #define GRID_COLS 5
 
 enum class gamestate {
+    waiting_for_turn,
     place,
     selecting_builder,
     moving_builder,

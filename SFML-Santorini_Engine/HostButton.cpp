@@ -1,4 +1,6 @@
 #include "Scripts\Game\Buttons\HostButton.h"
+#include "Managers/GameManager.h"
+#include "Game/Levels/MainMenu.h"
 
 void HostButton::Start()
 {
@@ -11,4 +13,5 @@ void HostButton::Start()
 
 void HostButton::OnClick()
 {
+	((MainMenu*)Game.GetCurrentLevel())->ChangePage(menuPage::SessionNetworkTypeSelect);
 }

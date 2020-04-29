@@ -21,5 +21,6 @@ public:
 
 	void AddUIObject(UIObject* obj);
 	void ClearUIObjects();
+	void PassTextEvent(sf::Event& e);
 };
 

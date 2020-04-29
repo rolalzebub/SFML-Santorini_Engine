@@ -3,6 +3,7 @@
 #include "Managers/GameManager.h"
 #include "Managers/InputManager.h"
 #include "Managers/UIManager.h"
+#include "Managers/NetworkManager.h"
 
 Engine* Engine::instance{ nullptr };
 
@@ -19,6 +20,11 @@ void Engine::Start()
 	m_window.create(sf::VideoMode(DEFAULT_WIDTH, DEFAULT_HEIGHT), "Santorini");
 	engineClock.restart();
 
+	m_window.setFramerateLimit(60);
+
+	m_window.setKeyRepeatEnabled(false);
+
+	NetworkingManager.Start();
 	Game.Start();
 	UI_Manager.Start();
 	Renderer.Start();
@@ -39,6 +45,8 @@ void Engine::Update()
 		{
 			if (e.type == sf::Event::EventType::Closed)
 				m_window.close();
+			else if (e.type == sf::Event::EventType::TextEntered)
+				UI_Manager.PassTextEvent(e);
 		}
 		m_window.clear();
 
@@ -46,6 +54,7 @@ void Engine::Update()
 		Game.Update();
 		UI_Manager.Update();
 		Renderer.Update();
+		NetworkingManager.Update();
 		if (timeSinceLastFixedUpdate >= fixedUpdateInterval) {
 
 			timeSinceLastFixedUpdate = sf::Time::Zero;
@@ -68,6 +77,16 @@ void Engine::Stop()
 void Engine::CloseWindow()
 {
 	m_window.close();
+}
+
+sf::Time Engine::GetDeltaTime()
+{
+	return frameDeltaTime;
+}
+
+sf::Time Engine::GetFixedUpdateTime()
+{
+	return fixedUpdateInterval;
 }
 
 sf::RenderWindow* Engine::GetRenderWindow()

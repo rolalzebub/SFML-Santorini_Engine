@@ -65,3 +65,12 @@ void UIManager::ClearUIObjects()
 	UI_Objects.clear();
 	Renderer.ClearUI();
 }
+
+void UIManager::PassTextEvent(sf::Event& e)
+{
+	for (auto& obj : UI_Objects) {
+		if (obj->CanReceiveText()) {
+			obj->ReceiveText(e);
+		}
+	}
+}

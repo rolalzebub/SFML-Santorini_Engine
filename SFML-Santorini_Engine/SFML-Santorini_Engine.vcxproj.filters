@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{4572ab95-178b-4f41-905a-60fea9da1c10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Buttons">
+      <UniqueIdentifier>{c76095f3-2178-4db5-9a1e-fe1e5a1a765f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Buttons">
+      <UniqueIdentifier>{6c95cdba-1d34-4a6c-a8a5-cec0d1015943}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML-Santorini_Engine.cpp">
@@ -72,38 +78,50 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Game\Buttons\PlayButton.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Game\Levels\MainMenu.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Managers\UIManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="HostButton.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Game\UI\InputTextArea.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Game\Buttons\CancelButton.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Game\Buttons\ClientButton.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Core\Button.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Game\Buttons\ConnectButton.cpp">
+    <ClCompile Include="TextDisplay.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Scripts\Managers\NetworkManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="Scripts\Game\Buttons\BackButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\CancelButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\ClientButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\ConnectButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="HostButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\PlayButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\LANButton.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="NetButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,38 +167,50 @@
     <ClInclude Include="Scripts\Core\UIObject.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Game\Buttons\PlayButton.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Managers\UIManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\Game\Levels\MainMenu.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Game\Buttons\QuitButton.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Game\Buttons\HostButton.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Game\UI\InputTextArea.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Game\Buttons\CancelButton.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Game\Buttons\ClientButton.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\Core\Button.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Game\Buttons\ConnectButton.h">
+    <ClInclude Include="Scripts\Game\UI\TextDisplay.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Scripts\Managers\NetworkManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="Scripts\Game\Buttons\BackButton.h">
-      <Filter>Header Files\Game</Filter>
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\CancelButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\ClientButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\ConnectButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\PlayButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\QuitButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\HostButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\LANButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\NetButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

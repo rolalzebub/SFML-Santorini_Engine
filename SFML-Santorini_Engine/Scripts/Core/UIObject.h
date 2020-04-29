@@ -11,12 +11,19 @@ protected:
 	void AddDrawable(sf::Drawable* obj) { m_drawables.push_back(obj); }
 
 	bool m_isDrawable = true;
+	bool canReceiveText = false;
+	sf::Event* textReceivedEvent;
+
+	void SetTextReceivable(bool rec) { canReceiveText = rec; }
 
 public:
 	virtual void Start() override {};
 	virtual void OnClick() {};
 	virtual void Update() override {};
 	virtual void Stop() override {};
+	virtual void ReceiveText(sf::Event& e) {};
+
+	bool CanReceiveText() { return canReceiveText; }
 
 	sf::Vector2f GetSize() { return m_size; }
 	void SetSize(sf::Vector2f size) { m_size = size; }

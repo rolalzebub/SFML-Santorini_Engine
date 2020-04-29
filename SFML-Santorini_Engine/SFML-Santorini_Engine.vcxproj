@@ -96,7 +96,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Side Projects\SFML-Santorini_Engine\SFML-Santorini_Engine\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -113,7 +113,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Side Projects\SFML-Santorini_Engine\SFML-Santorini_Engine\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -134,7 +134,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Side Projects\SFML-Santorini_Engine\SFML-Santorini_Engine\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,12 +155,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Side Projects\SFML-Santorini_Engine\SFML-Santorini_Engine\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-network-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HostButton.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="NetButton.cpp" />
     <ClCompile Include="Scripts\Components\Sprite.cpp" />
     <ClCompile Include="Scripts\Core\Button.cpp" />
     <ClCompile Include="Scripts\Core\Engine.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Scripts\Game\Buttons\CancelButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\ClientButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\ConnectButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\LANButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\PlayButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp" />
     <ClCompile Include="Scripts\Game\GameLevel.cpp" />
@@ -178,9 +180,11 @@
     <ClCompile Include="Scripts\Game\P_Builder.cpp" />
     <ClCompile Include="Scripts\Game\UI\InputTextArea.cpp" />
     <ClCompile Include="Scripts\Managers\GameManager.cpp" />
+    <ClCompile Include="Scripts\Managers\NetworkManager.cpp" />
     <ClCompile Include="Scripts\Managers\RenderManager.cpp" />
     <ClCompile Include="Scripts\Managers\UIManager.cpp" />
     <ClCompile Include="SFML-Santorini_Engine.cpp" />
+    <ClCompile Include="TextDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Components\Sprite.h" />
@@ -197,6 +201,8 @@
     <ClInclude Include="Scripts\Game\Buttons\ClientButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\ConnectButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\HostButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\LANButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\NetButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\PlayButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\QuitButton.h" />
     <ClInclude Include="Scripts\Game\GameLevel.h" />
@@ -204,8 +210,10 @@
     <ClInclude Include="Scripts\Game\Levels\MainMenu.h" />
     <ClInclude Include="Scripts\Game\P_Builder.h" />
     <ClInclude Include="Scripts\Game\UI\InputTextArea.h" />
+    <ClInclude Include="Scripts\Game\UI\TextDisplay.h" />
     <ClInclude Include="Scripts\Managers\GameManager.h" />
     <ClInclude Include="Scripts\Managers\InputManager.h" />
+    <ClInclude Include="Scripts\Managers\NetworkManager.h" />
     <ClInclude Include="Scripts\Managers\RenderManager.h" />
     <ClInclude Include="Scripts\Managers\UIManager.h" />
   </ItemGroup>

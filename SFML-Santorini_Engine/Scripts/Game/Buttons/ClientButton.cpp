@@ -1,4 +1,6 @@
 #include "ClientButton.h"
+#include "Managers/GameManager.h"
+#include "Game/Levels/MainMenu.h"
 
 void ClientButton::Start()
 {
@@ -11,4 +13,6 @@ void ClientButton::Start()
 
 void ClientButton::OnClick()
 {
+	auto level = (MainMenu*)Game.GetCurrentLevel();
+	level->ChangePage(menuPage::Client_EnteringHostIP);
 }

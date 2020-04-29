@@ -33,5 +33,8 @@ public:
 
 	void CloseWindow();
 
+	sf::Time GetDeltaTime();
+	sf::Time GetFixedUpdateTime();
+
 	sf::RenderWindow* GetRenderWindow();
 };
