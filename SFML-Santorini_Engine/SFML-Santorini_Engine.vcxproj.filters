@@ -117,11 +117,20 @@
     <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp">
       <Filter>Source Files\Game\Buttons</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Game\Buttons\LANButton.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="NetButton.cpp">
       <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\NetworkSyncedObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\LANButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="GameServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClient.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +220,15 @@
     </ClInclude>
     <ClInclude Include="Scripts\Game\Buttons\NetButton.h">
       <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\NetworkSyncedObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\GameServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClient.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

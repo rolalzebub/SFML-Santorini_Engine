@@ -24,13 +24,14 @@ void Engine::Start()
 
 	m_window.setKeyRepeatEnabled(false);
 
-	NetworkingManager.Start();
+	
 	Game.Start();
 	UI_Manager.Start();
 	Renderer.Start();
 	Renderer.SetWindow(&m_window);
 	Input.Start();
 	Input.SetInputWindow(&m_window);
+	NetworkingManager.Start();
 }
 
 void Engine::Update()

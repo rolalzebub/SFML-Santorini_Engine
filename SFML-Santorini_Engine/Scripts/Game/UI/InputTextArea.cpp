@@ -30,3 +30,8 @@ void InputTextArea::ReceiveText(sf::Event& e)
 	textReceivedEvent = &e;
 	UpdateText();
 }
+
+std::string InputTextArea::GetString()
+{
+	return m_areaText->getString();
+}

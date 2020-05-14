@@ -16,7 +16,7 @@
 //Menu UI elements
 #include "Game/UI/InputTextArea.h"
 #include "Game/UI/TextDisplay.h"
-
+#include <thread>
 #include <stack>
 
 enum class menuPage {
@@ -55,6 +55,8 @@ private:
 
 	InputTextArea ClientTypingHostIP;
 
+	TextDisplay clientCount;
+	TextDisplay maxPlayers;
 
 	TextDisplay hostIPDisplayMessage;
 	TextDisplay hostIPDisplay;

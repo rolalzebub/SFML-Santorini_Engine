@@ -1,6 +1,8 @@
 #include "MainMenu.h"
 #include "Managers/UIManager.h"
 #include "Managers/NetworkManager.h"
+
+
 void MainMenu::Start()
 {
 	
@@ -29,6 +31,17 @@ void MainMenu::Start()
 	hostIPDisplayMessage.isDrawable(false);
 	hostIPDisplayMessage.SetText("Server Address:");
 
+	clientCount.setPosition(256, 250);
+	clientCount.SetText("0");
+	clientCount.isDrawable(false);
+
+	maxPlayers.setPosition(280, 250);
+	maxPlayers.SetText("/3 (1 required to start)");
+	maxPlayers.isDrawable(false);
+
+	connectButton.setPosition(400, 250);
+	connectButton.isDrawable(false);
+
 
 	UI_Manager.AddUIObject(&playButton);
 	UI_Manager.AddUIObject(&quitButton);
@@ -39,6 +52,9 @@ void MainMenu::Start()
 	UI_Manager.AddUIObject(&hostIPDisplayMessage);
 	UI_Manager.AddUIObject(&lanPlayButton);
 	UI_Manager.AddUIObject(&netPlayButton);
+	UI_Manager.AddUIObject(&clientCount);
+	UI_Manager.AddUIObject(&maxPlayers);
+	UI_Manager.AddUIObject(&connectButton);
 
 	ClientTypingHostIP.isDrawable(false);
 	UI_Manager.AddUIObject(&ClientTypingHostIP);
@@ -49,7 +65,8 @@ void MainMenu::Start()
 
 void MainMenu::Update()
 {
-	
+	if(currentPage == menuPage::Hosting_Waiting)
+		clientCount.SetText(std::to_string(NetworkingManager.GetClientCount()));
 }
 
 void MainMenu::Stop()
@@ -80,6 +97,14 @@ void MainMenu::ChangePage(menuPage page)
 	}
 	else {
 		pageHistory.push(currentPage);
+	}
+
+	if ((currentPage == menuPage::Client_Connecting ||
+		currentPage == menuPage::Hosting_Waiting) &&
+		(page != menuPage::Client_InLobby ||
+			page!= menuPage::Hosting_InLobby))
+	{
+		NetworkingManager.StopAllConnections();
 	}
 
 	switch (page) {
@@ -118,6 +143,8 @@ void MainMenu::ChangePage(menuPage page)
 		}
 		else hostIPDisplay.SetText(NetworkingManager.GetLocalIPAddress().toString());
 
+		clientCount.isDrawable(true);
+		maxPlayers.isDrawable(true);
 
 		hostIPDisplay.isDrawable(true);
 		hostIPDisplayMessage.isDrawable(true);
@@ -125,6 +152,11 @@ void MainMenu::ChangePage(menuPage page)
 		currentUIObjects.push_back(&backButton);
 		currentUIObjects.push_back(&hostIPDisplay);
 		currentUIObjects.push_back(&hostIPDisplayMessage);
+		currentUIObjects.push_back(&clientCount);
+		currentUIObjects.push_back(&maxPlayers);
+
+		NetworkingManager.StartAsServer();
+		
 		break;
 
 	case menuPage::Hosting_InLobby:
@@ -134,11 +166,22 @@ void MainMenu::ChangePage(menuPage page)
 
 		ClientTypingHostIP.isDrawable(true);
 		backButton.isDrawable(true);
+		connectButton.isDrawable(true);
+		currentUIObjects.push_back(&connectButton);
 		currentUIObjects.push_back(&ClientTypingHostIP);
 		currentUIObjects.push_back(&backButton);
 		break;
 
 	case menuPage::Client_Connecting:
+
+		backButton.isDrawable(true);
+
+		currentUIObjects.push_back(&backButton);
+
+
+		NetworkingManager.StartAsClient();
+		NetworkingManager.SendConnectionRequest(ClientTypingHostIP.GetString());
+
 		break;
 
 	case menuPage::Client_InLobby:	
@@ -152,3 +195,4 @@ void MainMenu::GoPreviousPage()
 {
 	ChangePage(pageHistory.top());
 }
+

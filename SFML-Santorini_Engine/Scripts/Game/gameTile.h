@@ -3,12 +3,16 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/CircleShape.hpp"
 #include "SFML/Graphics/Color.hpp"
+#include "Components/NetworkSyncedObject.h"
 class gameTile :
 	public GameObject
 {
 private:
     sf::RectangleShape tileBase;
     sf::Color baseColour;
+
+    uPtr<NetworkSyncedObject> netAgent;
+
 public:
 
     gameTile();

@@ -159,9 +159,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameClient.cpp" />
+    <ClCompile Include="GameServer.cpp" />
     <ClCompile Include="HostButton.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="NetButton.cpp" />
+    <ClCompile Include="Scripts\Components\NetworkSyncedObject.cpp" />
     <ClCompile Include="Scripts\Components\Sprite.cpp" />
     <ClCompile Include="Scripts\Core\Button.cpp" />
     <ClCompile Include="Scripts\Core\Engine.cpp" />
@@ -187,6 +190,8 @@
     <ClCompile Include="TextDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameClient.h" />
+    <ClInclude Include="Scripts\Components\NetworkSyncedObject.h" />
     <ClInclude Include="Scripts\Components\Sprite.h" />
     <ClInclude Include="Scripts\Core\Button.h" />
     <ClInclude Include="Scripts\Core\Component.h" />
@@ -206,6 +211,7 @@
     <ClInclude Include="Scripts\Game\Buttons\PlayButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\QuitButton.h" />
     <ClInclude Include="Scripts\Game\GameLevel.h" />
+    <ClInclude Include="Scripts\Game\GameServer.h" />
     <ClInclude Include="Scripts\Game\gameTile.h" />
     <ClInclude Include="Scripts\Game\Levels\MainMenu.h" />
     <ClInclude Include="Scripts\Game\P_Builder.h" />
