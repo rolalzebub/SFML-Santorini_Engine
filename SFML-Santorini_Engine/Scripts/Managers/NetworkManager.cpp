@@ -1,5 +1,6 @@
 #include "NetworkManager.h"
-
+#include "Game/Levels/MainMenu.h"
+#include "GameManager.h"
 NetworkManager* NetworkManager::instance{ nullptr };
 
 NetworkManager& NetworkManager::Instance()
@@ -12,6 +13,8 @@ NetworkManager& NetworkManager::Instance()
 
 void NetworkManager::Start()
 {
+	localClient = Game.GetLocalClient();
+
 	m_publicAddress = sf::IpAddress::getPublicAddress();
 }
 
@@ -22,35 +25,50 @@ void NetworkManager::Stop()
 void NetworkManager::StartAsServer()
 {
 	m_mode = NetworkMode::Server;
-
-	std::thread tcpListenerThread([&]() {
-	sf::TcpListener listener;
-
-	listener.listen(m_port);
-	
-		sf::TcpSocket* newClient = new sf::TcpSocket();
-		sf::Packet packet;
-		sf::Socket::Status status = listener.accept(*newClient);
-
-		while (status == newClient->Disconnected ||
-			status == newClient -> Error) { 
-			status = listener.accept(*newClient);
-		}
-
-		std::cout << " New client: " << newClient->getRemoteAddress() << std::endl;
-
-		NetworkingManager.AcceptClient(newClient);
-
-		packet << "Connected to server";
-		newClient->send(packet);
-	});
-	tcpListenerThread.detach();
+	m_server = new GameServer();
+	m_server->StartListeningServer();
+	localClient->ConnectToLocalhost();
 }
 
 void NetworkManager::StartAsClient()
 {
 	m_mode = NetworkMode::Client;
-	
+}
+
+void NetworkManager::StartGame()
+{
+	((MainMenu*) Game.GetCurrentLevel())->Stop();
+
+	m_server->StartGame();
+
+	SendPacket(PacketType::GameStart);
+
+	Game.StartPlayLevel();
+}
+
+void NetworkManager::OnClientConnectionSuccess()
+{
+
+	std::cout << "Client connected";
+
+
+	//((MainMenu*)Game.GetCurrentLevel())->ChangePage(menuPage::Client_InLobby);
+
+	//std::thread clientListenerThread([&] {
+		/*sf::Packet packet;
+		sf::Socket::Status status = connectionToHostSocket->receive(packet);
+		
+		int packetType;
+		packet >> packetType;
+
+		PacketType ptype = (PacketType)packetType;
+
+		if (ptype == PacketType::GameStart) {
+			Game.StartPlayLevel();
+		}*/
+
+	//}); clientListenerThread.detach();
+
 }
 
 void NetworkManager::StartAcceptingConnections()
@@ -63,91 +81,51 @@ void NetworkManager::StartAcceptingConnections()
 
 	std::vector<sf::TcpSocket*> new_clients;
 
-	bool* keepThreadRunning = new bool(true);
 
-	runListenerThread = keepThreadRunning;
-
-
-	m_listener.listen(m_port);
 
 
 }
 
 void NetworkManager::StopAcceptingConnections()
 {
-	*runListenerThread = false;
 
-	current_thread->join();
+	//current_thread->join();
 }
 
 void NetworkManager::SendConnectionRequest(const std::string& ipAddress)
 {
-	sf::IpAddress ip(ipAddress);
-	sf::TcpSocket socket;
-	sf::Packet packet;
+	m_mode = NetworkMode::Client;
 	
-	unsigned short remote_port = m_port; 
-	//std::thread TcpConnectThread([&socket, &ip, &remote_port] {
-		
-		sf::IpAddress address;
-
-		packet.clear();
-
-		sf::Socket::Status status = connectionHostSocket.connect(ip, remote_port);
-
-		if (status == sf::Socket::Done) {
-
-			connectionHostSocket.receive(packet);
-			std::cout << packet;
-		}
-		else {
-			std::cout << "Receive status: " << status << std::endl;
-		}
-	//});
-	//TcpConnectThread.detach();
 }
-
 
 void NetworkManager::StopAllConnections()
 {
 	for (auto& obj : clientSockets) {
 		obj->disconnect();
 	}
-	
-	connectionHostSocket.disconnect();
+	if(connectionToHostSocket != nullptr)
+		connectionToHostSocket->disconnect();
 }
 
-//void NetworkManager::AcceptClient()
-//{
-//
-//	sf::TcpListener listener;
-//	sf::TcpSocket tsocket;
-//
-//
-//	if (listener.listen(m_port) != sf::Socket::Done) {
-//		std::cout << "Binding error TCP \n";
-//		return;
-//	}
-//	std::cout << "TCP bound to port " << listener.getLocalPort() << std::endl;
-//
-//	if (listener.accept(tsocket) != sf::Socket::Done) {
-//		std::cout << "Accepting error TCP";
-//		return;
-//	}
-//	sf::Packet packet;
-//	
-//	sf::TcpSocket* new_client_socket = new sf::TcpSocket();
-//
-//	listener.accept(*new_client_socket);
-//	
-//	StartAsServer();
-//}
-
-void NetworkManager::AcceptClient(sf::TcpSocket* newClient)
+void NetworkManager::SendPacket(PacketType pType, sf::Vector2f pos, int ID)
 {
-	clientSockets.push_back(newClient);
-}
 
+	sf::Packet packet;
+
+	packet << (int) pType;
+	//Access violation here on the socket, but why?!
+	//std::thread sendPacketThread([&] {
+		if (m_mode == NetworkMode::Server) {
+			for (auto& c : clientSockets) {
+				sf::Socket::Status status = c->send(packet);
+				std::cout << status;
+			}
+		}
+		else sf::Socket::Status status = connectionToHostSocket->send(packet);
+	//});
+	//sendPacketThread.detach();
+
+}
 
 sf::IpAddress NetworkManager::GetPublicIPAddress()
 {

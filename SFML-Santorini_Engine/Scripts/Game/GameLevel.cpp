@@ -1,7 +1,7 @@
 #include "GameLevel.h"
 #include "Managers/InputManager.h"
 #include <Game/P_Builder.h>
-
+#include "Managers/NetworkManager.h"
 void GameLevel::setup()
 {
     for (int i = 0; i < GRID_COLS; i++) {
@@ -32,21 +32,36 @@ void GameLevel::Start()
 
 void GameLevel::Update()
 {
+
+    ProcessMessages();
+
+    gameTile* clickedTile = CheckIfClickedTile();
+
+    if (clickedTile != nullptr) {
+
+    }
+
+    if (Input.IsMouseRightReleased()) {
+        EventMsg newMsg;
+        newMsg.msgType = MsgType::RightClick;
+        SendMessage(newMsg);
+    }
+
     for (auto& go : m_gameObjects) {
         go->Update();
     }
     switch (current_State) {
         case gamestate::place:
-            place();
+            //placePhase();
             break;
         case gamestate::selecting_builder:
-            selectBuilder();
+            //selectBuilder();
             break;
         case gamestate::moving_builder:
-            movePhase();
+            //movePhase();
             break;
         case gamestate::building_piece:
-            buildPhase();
+            //buildPhase();
             break;
     }
 }
@@ -58,8 +73,40 @@ void GameLevel::Stop()
     }
 }
 
+gameTile* GameLevel::CheckIfClickedTile()
+{
+    gameTile* clickedTile = nullptr;
+
+    sf::Vector2i mouse_pos = Input.GetMousePosition();
+
+    if (Input.IsMouseLeftReleased()) {
+
+        for (int i = 0; i < GRID_COLS; i++) {
+            for (int j = 0; j < GRID_ROWS; j++) {
+
+                sf::Vector2f currentTilePos = tiles[i][j].getPosition();
+
+                if (mouse_pos.x >= currentTilePos.x && mouse_pos.x <= currentTilePos.x + tiles[i][j].GetSize().x) {
+                    if (mouse_pos.y >= currentTilePos.y && mouse_pos.y <= currentTilePos.y + tiles[i][j].GetSize().y) {
+
+                        return &tiles[i][j];
+
+                    }
+                }
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+void GameLevel::SendMessage(EventMsg msg)
+{
+    messageQueue.push(msg);
+}
+
 // Place the builders at the beginning of the game
-void GameLevel::place()
+void GameLevel::placePhase()
 {
     sf::Vector2i mouse_pos = Input.GetMousePosition();
 
@@ -98,6 +145,8 @@ void GameLevel::place()
                                 current_State = gamestate::selecting_builder;
                             }
                         }
+
+                        NetworkingManager.SendPacket(PacketType::Place, tiles[i][j].getPosition());
                     }
                 }
             }
@@ -108,43 +157,12 @@ void GameLevel::place()
 
 void GameLevel::selectBuilder()
 {
-    for (auto& b : builders) {
+    /*for (auto& b : builders) {
         if (b->GetOwnerID() == turn) {
             b->HighlightGreen();
         }
     }
-
-
-    if (Input.IsMouseLeftReleased()) {
-
-        sf::Vector2i mouse_pos = Input.GetMousePosition();
-        
-        for (int i = 0; i < GRID_COLS; i++) {
-            for (int j = 0; j < GRID_ROWS; j++) {
-
-                sf::Vector2f currentTilePos = tiles[i][j].getPosition();
-
-                if (mouse_pos.x >= currentTilePos.x && mouse_pos.x <= currentTilePos.x + tiles[i][j].GetSize().x) {
-                    if (mouse_pos.y >= currentTilePos.y && mouse_pos.y <= currentTilePos.y + tiles[i][j].GetSize().y) {
-
-                        for (auto& b : builders) {
-                            if (currentTilePos == b->getPosition()) {
-
-                                if (b->GetOwnerID() != turn)
-                                    continue;
-
-                                b->HighlightRed();
-                                ShowAvailableMoveSpacesForBuilder(b);
-                                current_State = gamestate::moving_builder;
-                                currently_selected_builder = b;
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-    }
+    */
 }
 
 void GameLevel::buildPhase()
@@ -197,6 +215,63 @@ void GameLevel::ShowAvailableMoveSpacesForBuilder(P_Builder* builder)
                     }
                 }
             }
+        }
+    }
+}
+
+void GameLevel::ProcessMessages()
+{
+    while (!messageQueue.empty()) {
+        EventMsg msg = messageQueue.front();
+        switch (msg.msgType) {
+        case MsgType::RightClick:
+            
+            for (auto& tile : tiles) {
+                tile->UnHighlight();
+            }
+
+            for (auto& b : builders) {
+                b->UnHighlight();
+            }
+
+            break;
+
+        case MsgType::SelectBuilder:
+
+
+            builders[msg.builderID]->HighlightRed();
+
+            ShowAvailableMoveSpacesForBuilder(builders[msg.builderID]);
+
+            break;
+
+
+        case MsgType::MoveBuilder:
+
+            builders[msg.builderID]->setPosition(msg.builderNewPos);
+
+            break;
+
+        case MsgType::BuildOnTile:
+            
+            tiles[msg.TileID_X][msg.TileID_Y].build();
+            
+            break;
+
+        case MsgType::PlaceBuilder:
+
+            //Create new P_Builder on the tile
+            auto new_builder = new P_Builder();
+            new_builder->setPosition(tiles[msg.TileID_X][msg.TileID_Y].getPosition());
+
+            builders.push_back(new_builder);
+            AddGameObject(new_builder);
+
+            new_builder->Start();
+
+            //Assign ownership to player whose turn it is
+            new_builder->SetOwnerID(turn);
+            break;
         }
     }
 }

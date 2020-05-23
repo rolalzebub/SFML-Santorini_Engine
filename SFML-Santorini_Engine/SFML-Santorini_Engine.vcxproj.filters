@@ -45,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SFML-Santorini_Engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Components\Sprite.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
     <ClCompile Include="Scripts\Game\GameLevel.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Game\Levels\MainMenu.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -89,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="Scripts\Core\Button.cpp">
       <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="TextDisplay.cpp">
-      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Managers\NetworkManager.cpp">
       <Filter>Source Files\Managers</Filter>
@@ -108,29 +99,44 @@
     <ClCompile Include="Scripts\Game\Buttons\ConnectButton.cpp">
       <Filter>Source Files\Game\Buttons</Filter>
     </ClCompile>
-    <ClCompile Include="HostButton.cpp">
-      <Filter>Source Files\Game\Buttons</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Game\Buttons\PlayButton.cpp">
       <Filter>Source Files\Game\Buttons</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp">
       <Filter>Source Files\Game\Buttons</Filter>
     </ClCompile>
-    <ClCompile Include="NetButton.cpp">
-      <Filter>Source Files\Game\Buttons</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Components\NetworkSyncedObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Game\Buttons\LANButton.cpp">
       <Filter>Source Files\Game\Buttons</Filter>
     </ClCompile>
-    <ClCompile Include="GameServer.cpp">
+    <ClCompile Include="Scripts\Components\NetworkSyncedObject.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\UI\TextDisplay.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\GameServer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\GameClient.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Managers\InputManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\HostButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\NetButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game\Buttons\EnterIPButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Santorini_Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameClient.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Scripts\Game\Buttons\StartGameButton.cpp">
+      <Filter>Source Files\Game\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,14 +227,20 @@
     <ClInclude Include="Scripts\Game\Buttons\NetButton.h">
       <Filter>Header Files\Game\Buttons</Filter>
     </ClInclude>
+    <ClInclude Include="Scripts\Game\Buttons\StartGameButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
+    </ClInclude>
     <ClInclude Include="Scripts\Components\NetworkSyncedObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Game\GameServer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Scripts\Game\Buttons\EnterIPButton.h">
+      <Filter>Header Files\Game\Buttons</Filter>
     </ClInclude>
-    <ClInclude Include="GameClient.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Scripts\Core\GameServer.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\GameClient.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

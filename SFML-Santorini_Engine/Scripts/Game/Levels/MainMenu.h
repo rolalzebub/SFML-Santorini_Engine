@@ -11,7 +11,8 @@
 #include "Game/Buttons/BackButton.h"
 #include "Game/Buttons/LANButton.h"
 #include "Game/Buttons/NetButton.h"
-
+#include "Game/Buttons/StartGameButton.h"
+#include "Game/Buttons/EnterIPButton.h"
 
 //Menu UI elements
 #include "Game/UI/InputTextArea.h"
@@ -25,6 +26,7 @@ enum class menuPage {
 	SessionNetworkTypeSelect,
 	Hosting_Waiting,
 	Hosting_InLobby,
+	Client_EnteringName,
 	Client_EnteringHostIP,
 	Client_Connecting,
 	Client_InLobby
@@ -50,16 +52,25 @@ private:
 
 	BackButton backButton;
 
+	EnterIPButton goToIPEntryButton;
+
 	LANButton lanPlayButton;
 	NetButton netPlayButton;
 
+	StartGameButton startPlayButton; //set this up
+
 	InputTextArea ClientTypingHostIP;
+	InputTextArea ClientEnteringName;
+
 
 	TextDisplay clientCount;
 	TextDisplay maxPlayers;
 
 	TextDisplay hostIPDisplayMessage;
 	TextDisplay hostIPDisplay;
+
+	TextDisplay enterName;
+	TextDisplay enterIP;
 
 	std::vector<UIObject*> currentUIObjects;
 

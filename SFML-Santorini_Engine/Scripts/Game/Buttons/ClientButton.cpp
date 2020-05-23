@@ -14,5 +14,5 @@ void ClientButton::Start()
 void ClientButton::OnClick()
 {
 	auto level = (MainMenu*)Game.GetCurrentLevel();
-	level->ChangePage(menuPage::Client_EnteringHostIP);
+	level->ChangePage(menuPage::Client_EnteringName);
 }

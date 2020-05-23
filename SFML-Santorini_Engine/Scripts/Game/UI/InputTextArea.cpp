@@ -21,7 +21,7 @@ void InputTextArea::Start()
 
 void InputTextArea::Update()
 {
-
+	m_areaText->setPosition(getPosition());
 
 }
 

@@ -159,44 +159,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameClient.cpp" />
-    <ClCompile Include="GameServer.cpp" />
-    <ClCompile Include="HostButton.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="NetButton.cpp" />
     <ClCompile Include="Scripts\Components\NetworkSyncedObject.cpp" />
     <ClCompile Include="Scripts\Components\Sprite.cpp" />
     <ClCompile Include="Scripts\Core\Button.cpp" />
     <ClCompile Include="Scripts\Core\Engine.cpp" />
+    <ClCompile Include="Scripts\Core\GameClient.cpp" />
     <ClCompile Include="Scripts\Core\GameObject.cpp" />
+    <ClCompile Include="Scripts\Core\GameServer.cpp" />
     <ClCompile Include="Scripts\Core\Manager.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\BackButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\CancelButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\ClientButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\ConnectButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\EnterIPButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\HostButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\LANButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\NetButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\PlayButton.cpp" />
     <ClCompile Include="Scripts\Game\Buttons\QuitButton.cpp" />
+    <ClCompile Include="Scripts\Game\Buttons\StartGameButton.cpp" />
     <ClCompile Include="Scripts\Game\GameLevel.cpp" />
     <ClCompile Include="Scripts\Game\gameTile.cpp" />
     <ClCompile Include="Scripts\Game\Levels\MainMenu.cpp" />
     <ClCompile Include="Scripts\Game\P_Builder.cpp" />
     <ClCompile Include="Scripts\Game\UI\InputTextArea.cpp" />
+    <ClCompile Include="Scripts\Game\UI\TextDisplay.cpp" />
     <ClCompile Include="Scripts\Managers\GameManager.cpp" />
+    <ClCompile Include="Scripts\Managers\InputManager.cpp" />
     <ClCompile Include="Scripts\Managers\NetworkManager.cpp" />
     <ClCompile Include="Scripts\Managers\RenderManager.cpp" />
     <ClCompile Include="Scripts\Managers\UIManager.cpp" />
     <ClCompile Include="SFML-Santorini_Engine.cpp" />
-    <ClCompile Include="TextDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameClient.h" />
     <ClInclude Include="Scripts\Components\NetworkSyncedObject.h" />
     <ClInclude Include="Scripts\Components\Sprite.h" />
     <ClInclude Include="Scripts\Core\Button.h" />
     <ClInclude Include="Scripts\Core\Component.h" />
     <ClInclude Include="Scripts\Core\Engine.h" />
+    <ClInclude Include="Scripts\Core\GameClient.h" />
     <ClInclude Include="Scripts\Core\GameObject.h" />
+    <ClInclude Include="Scripts\Core\GameServer.h" />
     <ClInclude Include="Scripts\Core\Level.h" />
     <ClInclude Include="Scripts\Core\Manager.h" />
     <ClInclude Include="Scripts\Core\UIObject.h" />
@@ -205,13 +208,14 @@
     <ClInclude Include="Scripts\Game\Buttons\CancelButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\ClientButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\ConnectButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\EnterIPButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\HostButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\LANButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\NetButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\PlayButton.h" />
     <ClInclude Include="Scripts\Game\Buttons\QuitButton.h" />
+    <ClInclude Include="Scripts\Game\Buttons\StartGameButton.h" />
     <ClInclude Include="Scripts\Game\GameLevel.h" />
-    <ClInclude Include="Scripts\Game\GameServer.h" />
     <ClInclude Include="Scripts\Game\gameTile.h" />
     <ClInclude Include="Scripts\Game\Levels\MainMenu.h" />
     <ClInclude Include="Scripts\Game\P_Builder.h" />

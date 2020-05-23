@@ -71,5 +71,6 @@ void RenderManager::DeleteDrawable(int index)
 
 void RenderManager::ClearUI() 
 {
+	m_UIObjects.clear();
 	m_drawables.clear();
 }

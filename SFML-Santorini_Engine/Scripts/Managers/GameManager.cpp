@@ -55,3 +55,8 @@ Level* GameManager::GetCurrentLevel()
 {
 	return currentLevel;
 }
+
+GameClient* GameManager::GetLocalClient()
+{
+	return &localClient;
+}

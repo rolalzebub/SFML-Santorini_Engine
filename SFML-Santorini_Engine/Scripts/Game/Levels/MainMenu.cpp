@@ -36,12 +36,31 @@ void MainMenu::Start()
 	clientCount.isDrawable(false);
 
 	maxPlayers.setPosition(280, 250);
-	maxPlayers.SetText("/3 (1 required to start)");
+	maxPlayers.SetText("/ 1");
 	maxPlayers.isDrawable(false);
 
 	connectButton.setPosition(400, 250);
 	connectButton.isDrawable(false);
 
+	startPlayButton.setPosition(400, 300);
+	startPlayButton.isDrawable(false);
+
+	ClientTypingHostIP.isDrawable(false);
+	ClientTypingHostIP.setPosition(300, 200);
+
+	enterName.setPosition(300, 150);
+	enterName.isDrawable(false);
+	enterName.SetText("Enter your name");
+
+	enterIP.setPosition(300, 150);
+	enterIP.isDrawable(false);
+	enterIP.SetText("Enter Host IP Address");
+
+	ClientEnteringName.isDrawable(false);
+	ClientEnteringName.setPosition(300, 200);
+
+	goToIPEntryButton.isDrawable(false);
+	goToIPEntryButton.setPosition(400, 250);
 
 	UI_Manager.AddUIObject(&playButton);
 	UI_Manager.AddUIObject(&quitButton);
@@ -55,9 +74,13 @@ void MainMenu::Start()
 	UI_Manager.AddUIObject(&clientCount);
 	UI_Manager.AddUIObject(&maxPlayers);
 	UI_Manager.AddUIObject(&connectButton);
+	UI_Manager.AddUIObject(&startPlayButton);
 
-	ClientTypingHostIP.isDrawable(false);
 	UI_Manager.AddUIObject(&ClientTypingHostIP);
+	UI_Manager.AddUIObject(&goToIPEntryButton);
+	UI_Manager.AddUIObject(&ClientEnteringName);
+	UI_Manager.AddUIObject(&enterName);
+	UI_Manager.AddUIObject(&enterIP);
 
 	currentUIObjects.push_back(&playButton);
 	currentUIObjects.push_back(&quitButton);
@@ -65,13 +88,19 @@ void MainMenu::Start()
 
 void MainMenu::Update()
 {
-	if(currentPage == menuPage::Hosting_Waiting)
+	if (currentPage == menuPage::Hosting_Waiting) {
 		clientCount.SetText(std::to_string(NetworkingManager.GetClientCount()));
+		if (NetworkingManager.GetClientCount() > 0) {
+			startPlayButton.isDrawable(true);
+		}
+		else startPlayButton.isDrawable(false);
+	}
 }
 
 void MainMenu::Stop()
 {
 	UI_Manager.ClearUIObjects();
+	currentUIObjects.clear();
 }
 
 void MainMenu::SetOnlineSession(bool type)
@@ -161,12 +190,28 @@ void MainMenu::ChangePage(menuPage page)
 
 	case menuPage::Hosting_InLobby:
 		break;
+		
+	case menuPage::Client_EnteringName:
+		ClientEnteringName.isDrawable(true);
+		backButton.isDrawable(true);
+		goToIPEntryButton.isDrawable(true);
+		enterName.isDrawable(true);
+
+		currentUIObjects.push_back(&enterName);
+		currentUIObjects.push_back(&goToIPEntryButton);
+		currentUIObjects.push_back(&ClientEnteringName);
+		currentUIObjects.push_back(&backButton);
+
+		break;
 
 	case menuPage::Client_EnteringHostIP:
 
 		ClientTypingHostIP.isDrawable(true);
 		backButton.isDrawable(true);
 		connectButton.isDrawable(true);
+		enterIP.isDrawable(true);
+
+		currentUIObjects.push_back(&enterIP);
 		currentUIObjects.push_back(&connectButton);
 		currentUIObjects.push_back(&ClientTypingHostIP);
 		currentUIObjects.push_back(&backButton);
@@ -185,6 +230,9 @@ void MainMenu::ChangePage(menuPage page)
 		break;
 
 	case menuPage::Client_InLobby:	
+
+		backButton.isDrawable(true);
+
 		break;
 	}
 	

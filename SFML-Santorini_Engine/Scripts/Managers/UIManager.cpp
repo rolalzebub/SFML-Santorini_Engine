@@ -43,7 +43,8 @@ void UIManager::Update()
 	}
 
 	for (auto& obj : UI_Objects) {
-		obj->Update();
+		if(obj->isDrawable())
+			obj->Update();
 	}
 }
 
@@ -69,8 +70,10 @@ void UIManager::ClearUIObjects()
 void UIManager::PassTextEvent(sf::Event& e)
 {
 	for (auto& obj : UI_Objects) {
-		if (obj->CanReceiveText()) {
-			obj->ReceiveText(e);
+		if (obj->isDrawable()) {
+			if (obj->CanReceiveText()) {
+				obj->ReceiveText(e);
+			}
 		}
 	}
 }

@@ -1,9 +1,13 @@
 #pragma once
 #include "GameObject.h"
+#include "Core/GameClient.h"
 class Level
 {
 protected:
 	std::vector<GameObject*> m_gameObjects;
+
+	GameClient* localClient;
+
 public:
 	virtual void Start() {
 		for (auto& go : m_gameObjects) {

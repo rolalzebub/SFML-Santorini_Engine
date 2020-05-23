@@ -5,10 +5,10 @@
 
 #define Game GameManager::Instance()
 
+class GameServer;
+
 enum class GameState {
     MainMenu,
-    Hosting_Waiting_For_Players,
-    FindingHost,
     Hosting_InGame,
     Client_InGame,
     GameFinsihed
@@ -23,6 +23,9 @@ private:
     static GameManager* instance;
     MainMenu mainMenu;
     GameLevel level;
+
+    GameServer* localServer = nullptr;
+    GameClient localClient;
 
     Level* currentLevel;
 
@@ -40,5 +43,8 @@ public:
     void StopLevel();
     void QuitGame();
     Level* GetCurrentLevel();
+
+    GameClient* GetLocalClient();
+
 };
 
