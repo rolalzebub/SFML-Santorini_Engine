@@ -22,14 +22,14 @@ void RenderManager::Start()
 
 void RenderManager::Update()
 {
-	for (auto& dr : m_drawables) {
-		m_window->draw(*dr);
+	for (int i = 0; i < m_drawables.size(); i++) {
+		m_window->draw(*m_drawables[i]);
 	}
-	for (auto* sp : m_sprites) {
-		if (sp->isDrawable())
+	for (int i = 0; i < m_sprites.size(); i++) {
+		if (m_sprites[i]->isDrawable())
 		{
-			sp->OnUpdate();
-			m_window->draw(*sp->GetSprite());
+			m_sprites[i]->OnUpdate();
+			m_window->draw(*m_sprites[i]->GetSprite());
 		}
 	}
 }
@@ -73,4 +73,11 @@ void RenderManager::ClearUI()
 {
 	m_UIObjects.clear();
 	m_drawables.clear();
+}
+
+void RenderManager::ClearAll()
+{
+	m_sprites.clear();
+	m_drawables.clear();
+	m_UIObjects.clear();
 }

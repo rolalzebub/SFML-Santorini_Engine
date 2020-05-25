@@ -10,18 +10,10 @@ void GameClient::RunListenerThread()
 
 		cxnSocket->receive(packet);
 
-		PacketType pType;
-		int type;
-		packet >> type;
-
-		pType = (PacketType) type;
+		
 
 
-		switch (pType) {
-		case PacketType::GameStart:
-			Game.StartPlayLevel();
-			break;
-		}
+		
 
 	});
 }
@@ -66,7 +58,7 @@ void GameClient::SendConnectionRequest(const std::string& ip)
 {
 	using namespace std::literals::chrono_literals;
 
-	std::thread TcpConnectThread([&]() {
+	//std::thread TcpConnectThread([&]() {
 
 		std::this_thread::sleep_for(1s);
 
@@ -77,7 +69,7 @@ void GameClient::SendConnectionRequest(const std::string& ip)
 		packet.clear();
 		cxnSocket->setBlocking(true);
 
-		sf::Socket::Status status = cxnSocket->connect(ip, m_port);
+		sf::Socket::Status status = cxnSocket->connect(ipAddress, m_port);
 
 
 		cxnSocket->receive(packet);
@@ -92,6 +84,35 @@ void GameClient::SendConnectionRequest(const std::string& ip)
 			NetworkingManager.OnClientConnectionSuccess();
 		}
 
+	//});
+	//TcpConnectThread.detach();
+}
+
+void GameClient::StartCommandListener()
+{
+	std::thread serverListenerThread([&]() {
+		sf::Packet packet;
+		
+		while (keepListenerActive) {
+			cxnSocket->receive(packet);
+
+			int msgType = -1;
+			packet >> msgType; 
+			PacketType pType = PacketType::Quit;
+			if (msgType > -1) {
+				pType = (PacketType)msgType;
+			}
+
+			std::cout << std::endl << "Server sent: " << msgType;
+
+			switch (pType) {
+			case PacketType::GameStart:
+				Game.StartPlayLevel();
+				break;
+			}
+		}
 	});
-	TcpConnectThread.detach();
+
+	serverListenerThread.detach();
+
 }

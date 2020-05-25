@@ -20,5 +20,7 @@ public:
 	void StartListeningServer();
 
 	void StartGame();
+
+	int ClientCount();
 };
 

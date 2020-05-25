@@ -39,5 +39,6 @@ public:
 	void DeleteDrawable(int index);
 
 	void ClearUI();
+	void ClearAll();
 };
 

@@ -37,6 +37,7 @@ void GameManager::GoToMainMenu()
 
 void GameManager::StartPlayLevel()
 {
+	currentLevel->Stop();
 	currentLevel = &level;
 	currentLevel->Start();
 }

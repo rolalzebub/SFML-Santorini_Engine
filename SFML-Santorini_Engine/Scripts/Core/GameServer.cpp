@@ -8,6 +8,7 @@ void GameServer::StartListeningServer()
 		sf::TcpListener listener;
 
 		while (clientSockets.size() < 2) {
+			std::cout << "Waiting for client" << std::endl;
 			sf::TcpSocket* newClient = new sf::TcpSocket();
 			sf::Packet packet;
 
@@ -42,4 +43,9 @@ void GameServer::StartGame()
 		
 	}
 
+}
+
+int GameServer::ClientCount()
+{
+	return clientSockets.size();
 }

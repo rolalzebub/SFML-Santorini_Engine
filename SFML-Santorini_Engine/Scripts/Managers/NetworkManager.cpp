@@ -51,7 +51,7 @@ void NetworkManager::OnClientConnectionSuccess()
 
 	std::cout << "Client connected";
 
-
+	localClient->StartCommandListener();
 	//((MainMenu*)Game.GetCurrentLevel())->ChangePage(menuPage::Client_InLobby);
 
 	//std::thread clientListenerThread([&] {
@@ -96,6 +96,8 @@ void NetworkManager::SendConnectionRequest(const std::string& ipAddress)
 {
 	m_mode = NetworkMode::Client;
 	
+	localClient->SendConnectionRequest(ipAddress);
+
 }
 
 void NetworkManager::StopAllConnections()
@@ -142,7 +144,7 @@ sf::IpAddress NetworkManager::GetLocalIPAddress()
 
 int NetworkManager::GetClientCount()
 {
-	return clientSockets.size();
+	return m_server->ClientCount();
 }
 
 
