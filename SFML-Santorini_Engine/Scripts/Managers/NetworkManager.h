@@ -19,14 +19,7 @@ enum class NetworkingStatus {
 	Disconnected
 };
 
-enum class PacketType {
-	GameStart,			//nothing else needed
-	TurnStart,			//Nothing else needed along with this
-	Place,				//position of tile needed
-	Move,				//position of new tile, and builder ID needed 
-	Build,				//tile index in x,y format needed
-	Quit				//nothing else needed
-};
+
 class NetworkSyncedObject;
 
 class NetworkManager :
@@ -61,16 +54,13 @@ public:
 
 	void OnClientConnectionSuccess();
 
-	void StartAcceptingConnections();
-	void StopAcceptingConnections();
-	void SendConnectionRequest(const std::string& ipAddress);
-
 	void StopAllConnections();
 
-	void SendPacket(PacketType pType, sf::Vector2f pos = sf::Vector2f(0, 0), int ID = -1);
 
 	sf::IpAddress GetPublicIPAddress();
 	sf::IpAddress GetLocalIPAddress();
 	int GetClientCount();
+
+	GameClient* GetLocalClient();
 };
 

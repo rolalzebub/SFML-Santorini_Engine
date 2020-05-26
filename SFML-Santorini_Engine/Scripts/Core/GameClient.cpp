@@ -3,20 +3,6 @@
 #include "Core/GameServer.h"
 #include "Managers/GameManager.h"
 #include "Managers/NetworkManager.h"
-void GameClient::RunListenerThread()
-{
-	std::thread listenerThread([&]() {
-		sf::Packet packet;
-
-		cxnSocket->receive(packet);
-
-		
-
-
-		
-
-	});
-}
 
 void GameClient::ConnectToLocalhost()
 { 
@@ -60,7 +46,7 @@ void GameClient::SendConnectionRequest(const std::string& ip)
 
 	//std::thread TcpConnectThread([&]() {
 
-		std::this_thread::sleep_for(1s);
+		//std::this_thread::sleep_for(1s);
 
 		sf::IpAddress ipAddress(ip);
 		cxnSocket = makeUPtr<sf::TcpSocket>();
@@ -94,20 +80,27 @@ void GameClient::StartCommandListener()
 		sf::Packet packet;
 		
 		while (keepListenerActive) {
+			cxnSocket->setBlocking(true);
 			cxnSocket->receive(packet);
 
-			int msgType = -1;
-			packet >> msgType; 
-			PacketType pType = PacketType::Quit;
-			if (msgType > -1) {
-				pType = (PacketType)msgType;
-			}
 
-			std::cout << std::endl << "Server sent: " << msgType;
+			GameMessage message;
+			message.UnpackMessage(packet);
 
-			switch (pType) {
-			case PacketType::GameStart:
+			std::cout << std::endl << "Server sent: " << (int) message.msgType;
+
+			switch (message.msgType) {
+			case MsgType::GameStart:
 				Game.StartPlayLevel();
+				break;
+
+			case MsgType::TurnStart:
+				myTurn = true;
+				((GameLevel*)Game.GetCurrentLevel())->ReceiveMessage(message);
+				break;
+			default:
+				std::cout << "Forwarding message to level" << std::endl;
+				((GameLevel*)Game.GetCurrentLevel())->ReceiveMessage(message);
 				break;
 			}
 		}
@@ -115,4 +108,37 @@ void GameClient::StartCommandListener()
 
 	serverListenerThread.detach();
 
+}
+
+void GameClient::SendGameMessageToServer(GameMessage msg)
+{
+	sf::Packet packet;
+	msg.FillPacketWithMessage(packet);
+
+	if (msg.msgType == MsgType::PlaceBuilder) {
+		if (firstBuilderPlaced == false) {
+			firstBuilderPlaced = true;
+		}
+		else placePhaseFinished = true;
+	}
+
+
+	//std::thread([&] {
+		sf::Socket::Status status = cxnSocket->send(packet);
+	//}).detach();
+}
+
+bool GameClient::isTurn()
+{
+	return myTurn;
+}
+
+void GameClient::EndTurn()
+{
+	myTurn = false;
+}
+
+bool GameClient::PlacePhaseDone()
+{
+	return placePhaseFinished;
 }

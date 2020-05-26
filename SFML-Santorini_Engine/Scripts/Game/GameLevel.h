@@ -3,6 +3,7 @@
 #include "gameTile.h"
 #include "Core/Level.h"
 #include <queue>
+#include "Core/GameMessage.h"
 #define MAX_PLAYERS 4
 #define GRID_ROWS 5
 #define GRID_COLS 5
@@ -21,26 +22,7 @@ enum class gamestate {
 class GameManager;
 class P_Builder;
 
-enum class MsgType {
-    RightClick,
-    PlaceBuilder,
-    SelectBuilder,
-    MoveBuilder,
-    BuildOnTile
-};
 
-struct EventMsg {
-
-    MsgType msgType;
-    int sendingPlayerID = -1;
-
-    int builderID = -1;
-
-    sf::Vector2f builderNewPos = sf::Vector2f(-1,-1);
-
-    int TileID_X = -1;
-    int TileID_Y = -1;
-};
 
 
 class GameLevel: public Level
@@ -59,10 +41,11 @@ private:
     P_Builder* currently_selected_builder;
 
     unsigned short turn = 0;
-    
-    std::queue<EventMsg> messageQueue;
 
+    //only need messages for place move and build think about it
+    std::queue<GameMessage> messageQueue;
 
+    std::vector<gameTile*> currentlyNavigableTiles;
 
     void ShowAvailableMoveSpacesForBuilder(P_Builder* builder);
 
@@ -70,10 +53,10 @@ private:
 public:
     void update();
     void setup();
-    void placePhase();
-    void selectBuilder();
-    void movePhase();
-    void buildPhase();
+    //void placePhase();
+    //void selectBuilder();
+    //void movePhase();
+    //void buildPhase();
 
     void Start() override;
     void Update() override;
@@ -81,5 +64,10 @@ public:
 
     gameTile* CheckIfClickedTile();
 
-    void SendMessage(EventMsg msg);
+    void ReceiveMessage(GameMessage msg);
+
+    int GetTurnID();
+    void ProcessInput(gameTile& clickedTile);
+
+    void UnhighlightAll();
 };

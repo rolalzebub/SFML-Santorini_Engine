@@ -164,6 +164,7 @@
     <ClCompile Include="Scripts\Core\Button.cpp" />
     <ClCompile Include="Scripts\Core\Engine.cpp" />
     <ClCompile Include="Scripts\Core\GameClient.cpp" />
+    <ClCompile Include="Scripts\Core\GameMessage.cpp" />
     <ClCompile Include="Scripts\Core\GameObject.cpp" />
     <ClCompile Include="Scripts\Core\GameServer.cpp" />
     <ClCompile Include="Scripts\Core\Manager.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Scripts\Core\Component.h" />
     <ClInclude Include="Scripts\Core\Engine.h" />
     <ClInclude Include="Scripts\Core\GameClient.h" />
+    <ClInclude Include="Scripts\Core\GameMessage.h" />
     <ClInclude Include="Scripts\Core\GameObject.h" />
     <ClInclude Include="Scripts\Core\GameServer.h" />
     <ClInclude Include="Scripts\Core\Level.h" />
@@ -218,6 +220,7 @@
     <ClInclude Include="Scripts\Game\GameLevel.h" />
     <ClInclude Include="Scripts\Game\gameTile.h" />
     <ClInclude Include="Scripts\Game\Levels\MainMenu.h" />
+    <ClInclude Include="Scripts\Game\PlayerInput.h" />
     <ClInclude Include="Scripts\Game\P_Builder.h" />
     <ClInclude Include="Scripts\Game\UI\InputTextArea.h" />
     <ClInclude Include="Scripts\Game\UI\TextDisplay.h" />

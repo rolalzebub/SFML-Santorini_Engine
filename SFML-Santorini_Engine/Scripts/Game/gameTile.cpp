@@ -61,3 +61,13 @@ void gameTile::UnHighlight()
 {
     tileBase.setFillColor(baseColour);
 }
+
+void gameTile::SetTileID(sf::Vector2i ID)
+{
+    tileID = ID;
+}
+
+sf::Vector2i gameTile::GetTileID()
+{
+    return tileID;
+}

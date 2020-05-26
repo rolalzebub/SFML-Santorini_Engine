@@ -1,7 +1,7 @@
 #include "MainMenu.h"
 #include "Managers/UIManager.h"
 #include "Managers/NetworkManager.h"
-
+#include "Core/GameClient.h"
 
 void MainMenu::Start()
 {
@@ -225,7 +225,7 @@ void MainMenu::ChangePage(menuPage page)
 
 
 		NetworkingManager.StartAsClient();
-		NetworkingManager.SendConnectionRequest(ClientTypingHostIP.GetString());
+		NetworkingManager.GetLocalClient()->SendConnectionRequest(ClientTypingHostIP.GetString());
 
 		break;
 

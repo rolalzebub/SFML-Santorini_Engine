@@ -138,6 +138,9 @@
     <ClCompile Include="Scripts\Game\Buttons\StartGameButton.cpp">
       <Filter>Source Files\Game\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="Scripts\Core\GameMessage.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scripts\Core\Component.h">
@@ -241,6 +244,12 @@
     </ClInclude>
     <ClInclude Include="Scripts\Core\GameClient.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\GameMessage.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game\PlayerInput.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

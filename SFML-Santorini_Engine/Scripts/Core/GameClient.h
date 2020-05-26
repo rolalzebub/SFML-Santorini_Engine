@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Network.hpp>
 #include "Core/utility_headers.h"
-
+#include "Core/GameMessage.h"
 #ifndef clientPort
 #define clientPort m_port+1
 #endif
@@ -22,15 +22,22 @@ class GameClient
 
 	bool myTurn = false;
 
-public:
-	void OnStart();
-	void OnUpdate();
-	void OnStop();
+	bool firstBuilderPlaced = false;
 
-	void RunListenerThread();
+	bool placePhaseFinished = false;
+
+public:
+
 	void ConnectToLocalhost();
 	void SendConnectionRequest(const std::string& ip);
 
 	void StartCommandListener();
+
+	void SendGameMessageToServer(GameMessage msg);
+
+	bool isTurn();
+	void EndTurn();
+
+	bool PlacePhaseDone();
 };
 

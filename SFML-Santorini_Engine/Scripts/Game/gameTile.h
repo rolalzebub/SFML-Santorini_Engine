@@ -11,7 +11,7 @@ private:
     sf::RectangleShape tileBase;
     sf::Color baseColour;
 
-    uPtr<NetworkSyncedObject> netAgent;
+    sf::Vector2i tileID = sf::Vector2i(-1, -1);
 
 public:
 
@@ -32,5 +32,8 @@ public:
     void HighlightGreen();
     void HighlightRed();
     void UnHighlight();
+
+    void SetTileID(sf::Vector2i ID);
+    sf::Vector2i GetTileID();
 };
 
