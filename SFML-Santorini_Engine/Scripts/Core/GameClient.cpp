@@ -26,9 +26,9 @@ void GameClient::ConnectToLocalhost()
 		
 		cxnSocket->receive(packet);
 		sf::String serverResponse;
-		packet >> serverResponse;
+		packet >> serverResponse >> sessionPlayerID;
 		std::cout << serverResponse.toAnsiString() << std::endl;
-
+		std::cout << "Player ID: " << sessionPlayerID << std::endl;
 
 		std::cout << "Receive status: " << status << std::endl;
 
@@ -60,9 +60,9 @@ void GameClient::SendConnectionRequest(const std::string& ip)
 
 		cxnSocket->receive(packet);
 		sf::String serverResponse;
-		packet >> serverResponse;
+		packet >> serverResponse >> sessionPlayerID;
 		std::cout << serverResponse.toAnsiString() << std::endl;
-
+		std::cout << "Player ID: " << sessionPlayerID << std::endl;
 
 		std::cout << "Receive status: " << status << std::endl;
 
@@ -87,7 +87,7 @@ void GameClient::StartCommandListener()
 			GameMessage message;
 			message.UnpackMessage(packet);
 
-			std::cout << std::endl << "Server sent: " << (int) message.msgType;
+			std::cout << std::endl << "Server sent: " << (int) message.msgType << std::endl;
 
 			switch (message.msgType) {
 			case MsgType::GameStart:
@@ -136,6 +136,11 @@ bool GameClient::isTurn()
 void GameClient::EndTurn()
 {
 	myTurn = false;
+}
+
+int GameClient::GetID()
+{
+	return sessionPlayerID;
 }
 
 bool GameClient::PlacePhaseDone()

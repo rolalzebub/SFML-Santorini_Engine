@@ -38,6 +38,8 @@ public:
 	bool isTurn();
 	void EndTurn();
 
+	int GetID();
+
 	bool PlacePhaseDone();
 };
 

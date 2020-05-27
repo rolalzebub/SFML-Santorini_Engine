@@ -4,21 +4,31 @@
 gameTile::gameTile()
 {
     
-    tileBase.setOutlineThickness(5);
-    sf::Color cOutline;
-    cOutline = sf::Color(0xf2f0e6ff);
 
     baseColour = sf::Color(0x769D66ff);
+
+    tileBase.setOutlineThickness(5);
     tileBase.setSize(sf::Vector2f(110, 110));
-
     tileBase.setFillColor(baseColour);
+    tileBase.setOrigin(tileBase.getOrigin() - sf::Vector2f(2.5,2.5));
 
+    tile_lv2.setOutlineThickness(10);
+    tile_lv2.setFillColor(baseColour);
+    tile_lv2.setOrigin(tile_lv2.getOrigin() - sf::Vector2f(5, 5));
+    tile_lv2.setSize(sf::Vector2f(110, 110));
+
+    tile_lv3.setOutlineThickness(20);
+    tile_lv3.setFillColor(baseColour);
+    tile_lv3.setOrigin(tile_lv2.getOrigin() - sf::Vector2f(10, 10));
+    tile_lv3.setSize(sf::Vector2f(110, 110));
 }
 
-bool gameTile::build()
+void gameTile::build()
 {
-
-    return false;
+    switch (level) {
+    case 0:
+        break;
+    }
 }
 
 void gameTile::Start()
@@ -26,8 +36,14 @@ void gameTile::Start()
     
 
     tileBase.setPosition(getPosition());
+    tile_lv2.setPosition(getPosition());
+    tile_lv3.setPosition(getPosition());
 
-    Renderer.AddDrawable(&tileBase);
+     Renderer.AddDrawable(&tile_lv3);
+    Renderer.AddDrawable(&tile_lv2);
+    tileBaseID = Renderer.AddDrawable(&tileBase);
+
+    
 }
 
 void gameTile::Update()

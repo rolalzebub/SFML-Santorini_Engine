@@ -26,6 +26,7 @@ void GameLevel::Start()
         go->Start();
     }
     localClient = NetworkingManager.GetLocalClient();
+    current_State = gamestate::waiting_for_turn;
 }
 
 void GameLevel::Update()
@@ -117,6 +118,11 @@ void GameLevel::ProcessInput(gameTile& clickedTile)
 
         localClient->SendGameMessageToServer(message);
 
+        if (firstBuilderPlaced) {
+            current_State = gamestate::waiting_for_turn;
+        }
+        else firstBuilderPlaced = true;
+
         break;
 
     case gamestate::selecting_builder:
@@ -151,12 +157,14 @@ void GameLevel::ProcessInput(gameTile& clickedTile)
 
                 message.tileID = clickedTile.GetTileID();
 
-                message.sendingPlayerID = turn;
+                message.sendingPlayerID = localClient->GetID();
 
                 message.builderNewPos = clickedTile.getPosition();
 
                 localClient->SendGameMessageToServer(message);
                     
+                current_State = gamestate::building_piece;
+
                 break;
 
             }
@@ -174,6 +182,8 @@ void GameLevel::ProcessInput(gameTile& clickedTile)
 
         localClient->EndTurn();
 
+        current_State = gamestate::waiting_for_turn;
+        
         break;
 
     case gamestate::victory:
@@ -257,6 +267,13 @@ void GameLevel::ProcessMessages()
                 current_State = gamestate::selecting_builder;
             }
             else current_State = gamestate::place;
+
+            for (auto& b : builders) {
+                if (b->GetOwnerID() == localClient->GetID()) {
+                    b->HighlightGreen();
+                }
+            }
+
             break;
 
         case MsgType::MoveBuilder:
@@ -288,6 +305,8 @@ void GameLevel::ProcessMessages()
             new_builder->SetOwnerID(turn);
 
             new_builder->SetLevelID(builders.size() - 1);
+
+            
 
             break;
 

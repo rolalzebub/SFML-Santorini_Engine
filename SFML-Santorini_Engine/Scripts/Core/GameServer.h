@@ -13,6 +13,11 @@ struct PlayerInfo {
 	sf::TcpSocket* connector;
 };
 
+//phases of a player's turn once place phase has finished
+enum TurnPhase {
+	Moving,
+	Building
+};
 
 //only need messages for place move and build think about it
 class NetworkManager;
@@ -28,6 +33,8 @@ class GameServer
 	std::vector<PlayerInfo> players;
 
 	int turnID = -1;
+
+	TurnPhase currentTurn_Phase;
 
 	bool placePhaseOver = false;
 	bool currentTurn_firstBuilderPlaced = false;

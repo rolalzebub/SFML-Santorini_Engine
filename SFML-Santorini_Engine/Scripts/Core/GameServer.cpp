@@ -5,9 +5,13 @@
 void GameServer::NextTurn()
 {
 	turnID++;
+	currentTurn_firstBuilderPlaced = false;
+
 	if (turnID >= players.size()) {
 		if (!placePhaseOver) {
 			placePhaseOver = true;
+			currentTurn_firstBuilderPlaced = true;
+			currentTurn_Phase = TurnPhase::Moving;
 		}
 		turnID = 0;
 	}
@@ -37,11 +41,11 @@ void GameServer::StartListeningServer()
 
 			PlayerInfo newPlayer;
 			newPlayer.connector = newClient;
-			newPlayer.PlayerID = clientSockets.size() - 1;
+			newPlayer.PlayerID = players.size();
 
 			players.push_back(newPlayer);
 
-			packet << sf::String("Connected to server");
+			packet << sf::String("Connected to server") << newPlayer.PlayerID;
 			newClient->send(packet);
 
 		}
@@ -62,8 +66,8 @@ void GameServer::StartGame()
 	gameActive = true;
 
 	StartGameCommandEchoService();
-
-	SendTurnStart(0);
+	turnID = 0;
+	SendTurnStart(turnID);
 
 }
 
@@ -90,7 +94,7 @@ void GameServer::StartGameCommandEchoService()
 
 					std::cout << "client sent: " << (int)newMsg.msgType << std::endl;
 
-					if (ValidateMessage(newMsg)) {
+					//if (ValidateMessage(newMsg)) {
 
 						for (auto& s : clientSockets) {
 							s->send(packet);
@@ -98,15 +102,23 @@ void GameServer::StartGameCommandEchoService()
 
 						switch (newMsg.msgType) {
 						case MsgType::PlaceBuilder:
-							
+							if (currentTurn_firstBuilderPlaced) {
+								NextTurn();
+							}
+							else currentTurn_firstBuilderPlaced = true;
+							break;
+
+						case MsgType::MoveBuilder:
+							currentTurn_Phase = TurnPhase::Building;
 							break;
 
 						case MsgType::BuildOnTile:
+							currentTurn_Phase = TurnPhase::Moving;
 							NextTurn();
 							break;
 						}
 						
-					}
+					//}
 				}
 			}
 		}
@@ -156,15 +168,11 @@ bool GameServer::ValidateMessage(GameMessage message)
 			}
 
 			result = true;
-			if (currentTurn_firstBuilderPlaced) {
-				NextTurn();
-			}
-			else currentTurn_firstBuilderPlaced = true;
 		}
+		break;
 
 	case MsgType::BuildOnTile:
 		result = true;
-		NextTurn();
 		break;
 
 	case MsgType::MoveBuilder:
