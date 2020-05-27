@@ -3,7 +3,7 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/CircleShape.hpp"
 #include "SFML/Graphics/Color.hpp"
-#include "Components/NetworkSyncedObject.h"
+#include "Components/Sprite.h"
 class gameTile :
 	public GameObject
 {
@@ -18,14 +18,16 @@ private:
     sf::CircleShape tile_dome;
     sf::Color baseColour;
 
+    Sprite* tileSprite;
+
     sf::Vector2i tileID = sf::Vector2i(-1, -1);
 
+    unsigned short level = 0;
 public:
 
     gameTile();
 
     void build();
-    unsigned short level = 0;
 
     void Start() override;
     void Update() override;
@@ -42,5 +44,7 @@ public:
 
     void SetTileID(sf::Vector2i ID);
     sf::Vector2i GetTileID();
+
+    int GetTileHeight();
 };
 

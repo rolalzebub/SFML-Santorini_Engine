@@ -16,6 +16,9 @@ private:
 	short owner_player_levelID = -1;
 	short self_levelID = -1;
 
+	int standingLevel = 0;
+
+
 public:
 	P_Builder() :GameObject() {};
 
@@ -32,5 +35,8 @@ public:
 	void UnHighlight();
 	void HighlightGreen();
 	void HighlightRed();
+
+	void SetStandingLevel(int level);
+	int GetStandingLevel();
 };
 

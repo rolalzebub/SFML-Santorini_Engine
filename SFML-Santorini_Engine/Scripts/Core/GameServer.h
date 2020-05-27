@@ -2,7 +2,7 @@
 #include <vector>
 #include "SFML/Network.hpp"
 #include "GameMessage.h"
-
+#include "Game/P_Builder.h"
 #ifndef m_port
 #define m_port 5000
 #endif
@@ -41,7 +41,11 @@ class GameServer
 
 	bool gameActive = false;
 	
+	std::vector<P_Builder*> localBuilders;
+
 	void NextTurn();
+
+	void WinConditionReached(int playerID);
 public:
 
 	void StartListeningServer();

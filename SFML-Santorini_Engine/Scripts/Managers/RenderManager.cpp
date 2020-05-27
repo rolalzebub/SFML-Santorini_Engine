@@ -22,15 +22,25 @@ void RenderManager::Start()
 
 void RenderManager::Update()
 {
-	for (int i = 0; i < m_drawables.size(); i++) {
-		m_window->draw(*m_drawables[i]);
-	}
 	for (int i = 0; i < m_sprites.size(); i++) {
 		if (m_sprites[i]->isDrawable())
 		{
 			m_sprites[i]->OnUpdate();
-			m_window->draw(*m_sprites[i]->GetSprite());
+			
+			if (m_sprites[i]->HasPrimitiveDrawables())
+			{
+				auto drawables = m_sprites[i]->GetPrimitiveDrawables();
+				for (auto& dr : drawables) {
+					m_window->draw(*dr);
+				}
+			}
+			if(m_sprites[i]->HasTexture())
+				m_window->draw(*m_sprites[i]->GetSprite());
 		}
+	}
+
+	for (int i = 0; i < m_drawables.size(); i++) {
+		m_window->draw(*m_drawables[i]);
 	}
 }
 

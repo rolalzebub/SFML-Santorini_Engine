@@ -43,3 +43,13 @@ void P_Builder::HighlightRed()
         builderCircle.setFillColor(sf::Color::Red);
     }
 }
+
+void P_Builder::SetStandingLevel(int level)
+{
+    standingLevel = level;
+}
+
+int P_Builder::GetStandingLevel()
+{
+    return standingLevel;
+}

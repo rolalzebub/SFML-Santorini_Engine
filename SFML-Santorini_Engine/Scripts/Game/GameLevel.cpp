@@ -7,7 +7,7 @@ void GameLevel::setup()
     for (int i = 0; i < GRID_COLS; i++) {
         for (int j = 0; j < GRID_ROWS; j++) {
             tiles[i][j].setPosition(sf::Vector2f(i * tiles[i][j].GetSize().x, j * tiles[i][j].GetSize().y));
-            tiles[i][j].level = 0;
+            
 
             AddGameObject(&tiles[i][j]);
 
@@ -220,38 +220,61 @@ void GameLevel::UnhighlightAll()
         current_State = gamestate::selecting_builder;
 }
 
+void GameLevel::WinConditionReached(int playerID)
+{
+    GameMessage newMsg;
+
+    newMsg.builderID = playerID;
+
+    localClient->SendGameMessageToServer(newMsg);
+}
+
+std::vector<P_Builder*> GameLevel::GetBuilders()
+{
+    return builders;
+}
+
 void GameLevel::ShowAvailableMoveSpacesForBuilder(P_Builder* builder)
 {
     currently_selected_builder = builder;
-    for (int i = -1; i <= 1; i++) {
-        for (int j = -1; j <= 1; j++) {
 
-            if ((i == 0 && j == 0) == false) {
+    for (int i = 0; i < GRID_COLS; i++) {
+        for (int j = 0; j < GRID_ROWS; j++) {
 
-                sf::Vector2f positionToCompare = builder->getPosition();
-                positionToCompare.x += j * tiles[0][0].GetSize().x;
-                positionToCompare.y += i * tiles[0][0].GetSize().y;
+            //check if its not the tile youre standing on
+            if (builder->getPosition() != tiles[i][j].getPosition())
+            {
+                sf::Vector2f difference = builder->getPosition() - tiles[i][j].getPosition();
 
-                for (int i = 0; i < GRID_COLS; i++) {
-                    for (int j = 0; j < GRID_ROWS; j++) {
-                        if (tiles[i][j].getPosition() == positionToCompare) {
-                            bool skipTile = false;
-                            for (auto& b : builders) {
-                                if (skipTile == true)
-                                    break;
+                if (((difference.x > tiles[i][j].GetSize().x ||
+                    difference.y > tiles[i][j].GetSize().y) == false) &&
+                    ((-difference.x > tiles[i][j].GetSize().x ||
+                        -difference.y > tiles[i][j].GetSize().y) == false))
+                {
+                    
+                    if (builder->GetStandingLevel() <= tiles[i][j].GetTileHeight() + 1 &&
+                        builder->GetStandingLevel() >= tiles[i][j].GetTileHeight() - 1)
+                    {
+                        bool builderOnTile = false;
 
-                                if (b->getPosition() == positionToCompare)
-                                    skipTile = true;
+                        for (auto& b : builders) {
+                            if (b->getPosition() == tiles[i][j].getPosition()) {
+                                builderOnTile = true;
+                                break;
                             }
-                            if (skipTile == false) {
-                                tiles[i][j].HighlightGreen();
-                                currentlyNavigableTiles.push_back(&tiles[i][j]);
-                            }
+                        }
+
+                        if (!builderOnTile) {
+                            currentlyNavigableTiles.push_back(&tiles[i][j]);
+                            tiles[i][j].HighlightGreen();
                         }
                     }
                 }
+
             }
+
         }
+    
     }
 }
 
@@ -280,7 +303,13 @@ void GameLevel::ProcessMessages()
 
             builders[msg.builderID]->setPosition(msg.builderNewPos);
 
+            builders[msg.builderID]->SetStandingLevel(tiles[msg.tileID.x][msg.tileID.y].GetTileHeight());
+
             UnhighlightAll();
+
+            if (builders[msg.builderID]->GetStandingLevel() == 2) {
+                WinConditionReached(msg.sendingPlayerID);
+            }
 
             break;
 
@@ -302,7 +331,7 @@ void GameLevel::ProcessMessages()
             new_builder->Start();
 
             //Assign ownership to player whose turn it is
-            new_builder->SetOwnerID(turn);
+            new_builder->SetOwnerID(msg.sendingPlayerID);
 
             new_builder->SetLevelID(builders.size() - 1);
 

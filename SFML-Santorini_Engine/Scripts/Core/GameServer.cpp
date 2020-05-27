@@ -12,10 +12,37 @@ void GameServer::NextTurn()
 			placePhaseOver = true;
 			currentTurn_firstBuilderPlaced = true;
 			currentTurn_Phase = TurnPhase::Moving;
+
+			localBuilders = ((GameLevel*)Game.GetCurrentLevel())->GetBuilders();
+
 		}
 		turnID = 0;
 	}
 	SendTurnStart(turnID);
+}
+void GameServer::WinConditionReached(int playerID)
+{
+
+	GameMessage winMsg, lossMsg;
+
+	winMsg.msgType = MsgType::Victory;
+
+	lossMsg.msgType = MsgType::Defeat;
+
+	for (int i = 0; i < players.size(); i++) {
+		sf::Packet packet;
+
+		if (i == playerID) {
+			winMsg.FillPacketWithMessage(packet);
+			players[i].connector->send(packet);
+		}
+
+		else {
+			lossMsg.FillPacketWithMessage(packet);
+			players[i].connector->send(packet);
+		}
+	}
+
 }
 void GameServer::StartListeningServer()
 {
@@ -110,6 +137,13 @@ void GameServer::StartGameCommandEchoService()
 
 						case MsgType::MoveBuilder:
 							currentTurn_Phase = TurnPhase::Building;
+
+							for (auto& b : localBuilders) {
+								if (b->GetStandingLevel() == 2) {
+									WinConditionReached(b->GetOwnerID());
+								}
+							}
+
 							break;
 
 						case MsgType::BuildOnTile:

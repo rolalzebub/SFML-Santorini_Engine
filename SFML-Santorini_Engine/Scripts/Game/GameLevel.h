@@ -70,4 +70,7 @@ public:
     void ProcessInput(gameTile& clickedTile);
 
     void UnhighlightAll();
+
+    void WinConditionReached(int playerID);
+    std::vector<P_Builder*> GetBuilders();
 };

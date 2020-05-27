@@ -12,8 +12,10 @@ void Sprite::OnStart()
 
 void Sprite::OnUpdate()
 {
-	m_spriteTexture->setPosition(m_parent->getPosition());
-	m_spriteTexture->setRotation(m_parent->getRotation());
+	if (hasTexture) {
+		m_spriteTexture->setPosition(m_parent->getPosition());
+		m_spriteTexture->setRotation(m_parent->getRotation());
+	}
 }
 
 void Sprite::Stop()
@@ -42,6 +44,40 @@ bool Sprite::isDrawable()
 void Sprite::isDrawable(bool draw)
 {
 	m_isDrawable = draw;
+}
+
+bool Sprite::HasPrimitiveDrawables()
+{
+	return hasDrawables;
+}
+
+void Sprite::AddSFDrawableToSprite(sf::Drawable* dr)
+{
+	if (drawables.size() == 0) {
+		hasDrawables = true;
+	}
+	drawables.push_back(makeUPtr<sf::Drawable*>(dr));
+}
+
+std::vector<sf::Drawable*> Sprite::GetPrimitiveDrawables()
+{
+	std::vector<sf::Drawable*> newList;
+
+	for (int i = 0; i < drawables.size(); i++) {
+		newList.push_back(*drawables[i].get());
+	}
+
+	return newList;
+}
+
+void Sprite::ClearDrawables()
+{
+	drawables.clear();
+}
+
+bool Sprite::HasTexture()
+{
+	return hasTexture;
 }
 
 sf::Sprite* Sprite::GetSprite()

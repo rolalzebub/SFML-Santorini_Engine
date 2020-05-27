@@ -10,6 +10,8 @@ enum class MsgType {
     PlaceBuilder,
     MoveBuilder,
     BuildOnTile,
+    Victory,
+    Defeat,
     Quit
 };
 

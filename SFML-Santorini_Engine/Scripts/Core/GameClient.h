@@ -2,9 +2,7 @@
 #include <SFML/Network.hpp>
 #include "Core/utility_headers.h"
 #include "Core/GameMessage.h"
-#ifndef clientPort
-#define clientPort m_port+1
-#endif
+
 
 class GameClient
 {
@@ -25,6 +23,7 @@ class GameClient
 	bool firstBuilderPlaced = false;
 
 	bool placePhaseFinished = false;
+
 
 public:
 
